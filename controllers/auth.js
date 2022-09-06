@@ -4,7 +4,7 @@ const User = require('../models/User')
 
  exports.getLogin = (req, res) => {
     if (req.user) {
-      return res.redirect('/todos')
+        redirect(`users/${req.user._id}/dashboard`)
     }
     res.render('login', {
       title: 'Login'
@@ -31,7 +31,7 @@ const User = require('../models/User')
       req.logIn(user, (err) => {
         if (err) { return next(err) }
         req.flash('success', { msg: 'Success! You are logged in.' })
-        res.redirect(req.session.returnTo || '/todos')
+        res.redirect(req.session.returnTo || '/users/${req.user._id}/dashboard')
       })
     })(req, res, next)
   }
@@ -49,7 +49,7 @@ const User = require('../models/User')
   
   exports.getSignup = (req, res) => {
     if (req.user) {
-      return res.redirect('/todos')
+      return res.redirect('/users/${req.user._id}/dashboard')
     }
     res.render('signup', {
       title: 'Create Account'
@@ -89,8 +89,64 @@ const User = require('../models/User')
           if (err) {
             return next(err)
           }
-          res.redirect('/todos')
+          res.redirect('/login')
         })
       })
     })
   }
+
+// const User = require('../models/User')
+// const passport = require('passport')
+// const bcrypt = require('bcrypt')
+
+// module.exports = {
+
+//     getSignUp: async (request, response)=>{
+
+//         //render the sign-up.ejs file
+//         response.render('signup.ejs', { title: 'Sign up' })
+//     }, 
+
+//     getLogin: async (request, response)=>{
+
+//         //render the login.ejs file
+//         response.render('login.ejs', { title: 'Login' })
+//     }, 
+
+//     createUserAccount: async (request, response) => {
+//         try {
+//             const hashedPassword = await bcrypt.hash(request.body.password, 10)
+//             await User.create({
+//                 email: request.body.email, 
+//                 password: hashedPassword
+//             })
+//             console.log('User added')
+//             response.redirect('/login')
+//         } catch(err) {
+//             console.log(err)
+//             response.render('signup.ejs', {title: 'Sign up', errorMessage: 'Error: Please try again.'})
+//         }
+//     },
+
+//     login: (request, response, next) => {
+//         passport.authenticate('local', (err, user, info) => {
+//             if (err) { return next(err) }
+//             if (!user) {
+//               request.flash('errors', info)
+//               return response.redirect('/login')
+//             }
+//             request.logIn(user, (err) => {
+//               if (err) { return next(err) }
+//               request.flash('success', { msg: 'Success! You are logged in.' })
+//               response.redirect(`users/${request.user._id}/dashboard`)
+//             })
+//           })(request, response, next)
+//     }, 
+
+//     logout: async (request, response)=>{
+//         request.logOut(err => {
+//             if (err) { return next(err)}
+//         })
+//         response.redirect('/')
+//     }
+// }

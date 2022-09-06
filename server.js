@@ -17,7 +17,8 @@ const dbConnection = require('./config/database')
 // Passport config
 require('./config/passport')(passport)
 
-const mainRoutes = require('./routes/main')
+const mainRouter = require('./routes/main')
+const usersRouter = require('./routes/users')
 
 app.set('view engine', 'ejs')
 app.set('layout', './layouts/layout')
@@ -49,7 +50,8 @@ app.use(function(req, res, next) {
   next();
 });
   
-app.use('/', mainRoutes)
+app.use('/', mainRouter)
+app.use('/users', usersRouter)
  
 app.listen(process.env.PORT || PORT, ()=>{
   console.log(`Server running on port ${PORT}`)
