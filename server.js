@@ -8,14 +8,17 @@ const PORT = process.env.PORT
 const mongoose = require('mongoose')
 const passport = require('passport')
 const session = require('express-session')
-const MongoStore = require('connect-mongo')
+const MongoStore = require('connect-mongo')(session)
 const expressLayouts = require('express-ejs-layouts')
 const flash = require('express-flash')
 const logger = require('morgan')
-const dbConnection = require('./config/database')
+const connectDB = require("./config/database");
 
 // Passport config
 require('./config/passport')(passport)
+
+//Connect To Database
+connectDB();
 
 const mainRouter = require('./routes/main')
 const usersRouter = require('./routes/users')
@@ -34,7 +37,7 @@ app.use(
       secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
-      store: MongoStore.create({ clientPromise: dbConnection}),
+      store: new MongoStore({ mongooseConnection: mongoose.connection }),
     })
   )
   
