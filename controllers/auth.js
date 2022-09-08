@@ -30,6 +30,7 @@ const User = require('../models/User')
       }
       req.logIn(user, (err) => {
         if (err) { return next(err) }
+        //This success message does not show up. How to fix? 
         req.flash('success', { msg: 'Success! You are logged in.' })
         res.redirect(req.session.returnTo || `users/${req.user._id}/dashboard`)
       })
@@ -64,26 +65,25 @@ const User = require('../models/User')
   
     if (validationErrors.length) {
       req.flash('errors', validationErrors)
-      return res.redirect('../signup')
+      return res.redirect('/signup')
     }
     req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false })
   
     const user = new User({
-      userName: req.body.userName,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password
     })
   
-    User.findOne({$or: [
-      {email: req.body.email},
-      {userName: req.body.userName}
-    ]}, (err, existingUser) => {
+    User.findOne({email: req.body.email}, (err, existingUser) => {
       if (err) { return next(err) }
       if (existingUser) {
-        req.flash("errors", {
-          msg: "Account with that email address or username already exists.",
+        req.flash('errors', { msg: 'Account with that email address already exists.' })
+        req.session.save(function(err) {   //Force the flash message to save first; then redirect in the callback; https://github.com/jaredhanson/connect-flash/issues/23#issuecomment-390593818
+          console.log('session saved');
+          res.redirect('/..signup');
         });
-        return res.redirect("../signup");
       }
       user.save((err) => {
         if (err) { return next(err) }
@@ -96,59 +96,3 @@ const User = require('../models/User')
       })
     })
   }
-
-// const User = require('../models/User')
-// const passport = require('passport')
-// const bcrypt = require('bcrypt')
-
-// module.exports = {
-
-//     getSignUp: async (request, response)=>{
-
-//         //render the sign-up.ejs file
-//         response.render('signup.ejs', { title: 'Sign up' })
-//     }, 
-
-//     getLogin: async (request, response)=>{
-
-//         //render the login.ejs file
-//         response.render('login.ejs', { title: 'Login' })
-//     }, 
-
-//     createUserAccount: async (request, response) => {
-//         try {
-//             const hashedPassword = await bcrypt.hash(request.body.password, 10)
-//             await User.create({
-//                 email: request.body.email, 
-//                 password: hashedPassword
-//             })
-//             console.log('User added')
-//             response.redirect('/login')
-//         } catch(err) {
-//             console.log(err)
-//             response.render('signup.ejs', {title: 'Sign up', errorMessage: 'Error: Please try again.'})
-//         }
-//     },
-
-//     login: (request, response, next) => {
-//         passport.authenticate('local', (err, user, info) => {
-//             if (err) { return next(err) }
-//             if (!user) {
-//               request.flash('errors', info)
-//               return response.redirect('/login')
-//             }
-//             request.logIn(user, (err) => {
-//               if (err) { return next(err) }
-//               request.flash('success', { msg: 'Success! You are logged in.' })
-//               response.redirect(`users/${request.user._id}/dashboard`)
-//             })
-//           })(request, response, next)
-//     }, 
-
-//     logout: async (request, response)=>{
-//         request.logOut(err => {
-//             if (err) { return next(err)}
-//         })
-//         response.redirect('/')
-//     }
-// }

@@ -1,15 +1,15 @@
-<% if (locals.messages.errors) { %>
+<% if (locals.messages.errors) { %> 
     <% messages.errors.forEach( el => { %>
-        <div class="alert alert-danger"><%= el.msg %></div>
-    <% }) %>    
-<% } %>
-<% if (locals.messages.info) { %>
+    <div><%= el.msg %></div>
+<% }) %> <% } %> 
+    
+<% if (locals.messages.info) { %> 
     <% messages.info.forEach( el => { %>
-        <div class="alert alert-info"><%= el.msg %></div>
-    <% }) %>    
-<% } %>
-<% if (locals.messages.success) { %>
+    <div><%= el.msg %></div>
+<% }) %> <% } %>
+
+<% if (locals.messages.success) { %> 
     <% messages.success.forEach( el => { %>
-        <div class="alert alert-info"><%= el.msg %></div>
-    <% }) %>    
-<% } %>
+    <div><%= el.msg %></div>
+<% }) %> <% } %>
+
