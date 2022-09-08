@@ -31,7 +31,7 @@ const User = require('../models/User')
       req.logIn(user, (err) => {
         if (err) { return next(err) }
         req.flash('success', { msg: 'Success! You are logged in.' })
-        res.redirect(req.session.returnTo || '/users/${req.user._id}/dashboard')
+        res.redirect(req.session.returnTo || `users/${req.user._id}/dashboard`)
       })
     })(req, res, next)
   }
@@ -49,7 +49,7 @@ const User = require('../models/User')
   
   exports.getSignup = (req, res) => {
     if (req.user) {
-      return res.redirect('/users/${req.user._id}/dashboard')
+      return res.redirect(`users/${req.user._id}/dashboard`)
     }
     res.render('signup', {
       title: 'Create Account'
@@ -80,8 +80,10 @@ const User = require('../models/User')
     ]}, (err, existingUser) => {
       if (err) { return next(err) }
       if (existingUser) {
-        req.flash('errors', { msg: 'Account with that email address or username already exists.' })
-        return res.redirect('../signup')
+        req.flash("errors", {
+          msg: "Account with that email address or username already exists.",
+        });
+        return res.redirect("../signup");
       }
       user.save((err) => {
         if (err) { return next(err) }
