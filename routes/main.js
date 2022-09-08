@@ -23,12 +23,10 @@ router.post('/signup', authController.postSignup)
 //POST to /login to login (authenticate) a user
 router.post('/login', authController.postLogin)
 
-// @desc    Auth with Google
-// @route   GET /auth/google
-router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }))
+// GET /auth/google
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
-// @desc    Google auth callback
-// @route   GET /auth/google/callback
+// GET /auth/google/callback
 router.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
