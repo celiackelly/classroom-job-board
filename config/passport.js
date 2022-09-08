@@ -57,8 +57,8 @@ module.exports = function (passport) {
             accessTokenExpires: moment().add(params.expires_in, 'seconds').format(),
             refreshToken,
           });
-          user.firstName = profile.firstName;
-          user.lastName = profile.lastName;
+          user.firstName = profile.name.givenName;
+          user.lastName = profile.name.familyName;
           user.save((err) => {
             req.flash('info', { msg: 'Google account has been linked.' });
             done(err, user);
@@ -79,6 +79,7 @@ module.exports = function (passport) {
               done(err);
             });
           } else {
+            console.log(profile)
             const user = new User();
             user.email = profile.emails[0].value;
             user.googleId = profile.id;
@@ -88,8 +89,8 @@ module.exports = function (passport) {
               accessTokenExpires: moment().add(params.expires_in, 'seconds').format(),
               refreshToken,
             });
-            user.firstName = profile.firstName;
-            user.lastName = profile.lastName;
+            user.firstName = profile.name.givenName;
+            user.lastName = profile.name.familyName;
             user.save((err) => {
               done(err, user);
             });
