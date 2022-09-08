@@ -74,7 +74,10 @@ module.exports = function (passport) {
           if (err) { return done(err); }
           if (existingEmailUser) {
             req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Google manually from your user profile.' });
-            done(null, false, err);
+            req.session.save(function(err) {   //Force the flash message to save first; then redirect in the callback; https://github.com/jaredhanson/connect-flash/issues/23#issuecomment-390593818
+              console.log('session saved');
+              done(err);
+            });
           } else {
             const user = new User();
             user.email = profile.emails[0].value;
