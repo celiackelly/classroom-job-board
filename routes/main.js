@@ -18,8 +18,6 @@ router.get('/login', ensureGuest, authController.getLogin)
 //POST to /sign-up to create an account
 router.post('/signup', authController.postSignup)
 
-//how to SIGN UP with Google? 
-
 //POST to /login to login (authenticate) a user
 router.post('/login', authController.postLogin)
 
@@ -29,7 +27,7 @@ router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 
 // GET /auth/google/callback
 router.get(
   '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
+  passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
     res.redirect(`/users/${req.user._id}/dashboard`)
   }

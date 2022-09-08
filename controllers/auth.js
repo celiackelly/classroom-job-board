@@ -65,7 +65,7 @@ const User = require('../models/User')
   
     if (validationErrors.length) {
       req.flash('errors', validationErrors)
-      return res.redirect('/signup')
+      return res.redirect('../signup')
     }
     req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false })
   
@@ -79,9 +79,8 @@ const User = require('../models/User')
     User.findOne({email: req.body.email}, (err, existingUser) => {
       if (err) { return next(err) }
       if (existingUser) {
-        //This flash message didn't show up until I refreshed the page again
         req.flash('errors', { msg: 'Account with that email address already exists.' })
-        return res.redirect('/signup')
+        return res.redirect('../signup')
       }
       user.save((err) => {
         if (err) { return next(err) }

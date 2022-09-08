@@ -74,7 +74,7 @@ module.exports = function (passport) {
           if (err) { return done(err); }
           if (existingEmailUser) {
             req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Google manually from your user profile.' });
-            done(err);
+            done(null, false, err);
           } else {
             const user = new User();
             user.email = profile.emails[0].value;
