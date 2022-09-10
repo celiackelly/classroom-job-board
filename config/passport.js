@@ -1,9 +1,10 @@
 const LocalStrategy = require('passport-local').Strategy
-const GoogleStrategy = require('passport-google-oauth20').Strategy
+// const GoogleStrategy = require('passport-google-oauth20').Strategy
+const GoogleOneTapStrategy = require('passport-google-one-tap').GoogleOneTapStrategy
 const refresh = require('passport-oauth2-refresh')
 const mongoose = require('mongoose')
 const User = require('../models/User')
-const moment = require('moment');
+// const moment = require('moment');
 
 module.exports = function (passport) {
   passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
@@ -41,66 +42,120 @@ module.exports = function (passport) {
  *       - Else create a new account.
  */
 
-   const googleStrategyConfig = new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback',
-    passReqToCallback: true
-  }, (req, accessToken, refreshToken, params, profile, done) => {
-    if (req.user) {
-        User.findById(req.user.id, (err, user) => {
-          if (err) { return done(err); }
-          user.googleId = profile.id;
-          user.tokens.push({
-            kind: 'google',
-            accessToken,
-            accessTokenExpires: moment().add(params.expires_in, 'seconds').format(),
-            refreshToken,
-          });
-          user.firstName = profile.name.givenName;
-          user.lastName = profile.name.familyName;
-          user.save((err) => {
-            req.flash('info', { msg: 'Google account has been linked.' });
-            done(err, user);
-          });
-        });
-      } else {
-      User.findOne({ googleId: profile.id }, (err, existingUser) => {
-        if (err) { return done(err); }
-        if (existingUser) {
-          return done(null, existingUser);
-        }
-        User.findOne({ email: profile.emails[0].value }, (err, existingEmailUser) => {
-          if (err) { return done(err); }
-          if (existingEmailUser) {
-            req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Google manually from your user profile.' });
-            req.session.save(function(err) {   //Force the flash message to save first; then redirect in the callback; https://github.com/jaredhanson/connect-flash/issues/23#issuecomment-390593818
-              console.log('session saved');
-              done(err);
-            });
-          } else {
-            console.log(profile)
-            const user = new User();
-            user.email = profile.emails[0].value;
+   passport.use(
+    new GoogleOneTapStrategy(
+      {
+        clientID: process.env.GOOGLE_CLIENT_ID, // your google client ID
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET, 
+        redirectUri: process.env.GOOGLE_AUTH_CALLBACK,
+        verifyCsrfToken: true, // whether to validate the csrf token or not
+      },
+      function (profile, done) {
+        if(!profile) {console.log('sadness')}
+        console.log(profile)
+        if (req.user) {
+          User.findById(req.user.id, (err, user) => {
+            if (err) { return done(err); }
             user.googleId = profile.id;
-            user.tokens.push({
-              kind: 'google',
-              accessToken,
-              accessTokenExpires: moment().add(params.expires_in, 'seconds').format(),
-              refreshToken,
-            });
             user.firstName = profile.name.givenName;
             user.lastName = profile.name.familyName;
             user.save((err) => {
+              req.flash('info', { msg: 'Google account has been linked.' });
               done(err, user);
             });
+          });
+        } else {
+        User.findOne({ googleId: profile.id }, (err, existingUser) => {
+          if (err) { return done(err); }
+          if (existingUser) {
+            return done(null, existingUser);
           }
+          User.findOne({ email: profile.emails[0].value }, (err, existingEmailUser) => {
+            if (err) { return done(err); }
+            if (existingEmailUser) {
+              req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Google manually from your user profile.' });
+              req.session.save(function(err) {   //Force the flash message to save first; then redirect in the callback; https://github.com/jaredhanson/connect-flash/issues/23#issuecomment-390593818
+                console.log('session saved');
+                done(err);
+              });
+            } else {
+              console.log(profile)
+              const user = new User();
+              user.email = profile.emails[0].value;
+              user.googleId = profile.id;
+              user.firstName = profile.name.givenName;
+              user.lastName = profile.name.familyName;
+              user.save((err) => {
+                done(err, user);
+              });
+            }
+          });
         });
-      });
-    }
-  });
-  passport.use('google', googleStrategyConfig);
-  refresh.use('google', googleStrategyConfig);
+      }
+      }
+    )
+  );
+
+  //  const googleStrategyConfig = new GoogleStrategy({
+  //   clientID: process.env.GOOGLE_CLIENT_ID,
+  //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  //   callbackURL: '/auth/google/callback',
+  //   passReqToCallback: true
+  // }, (req, accessToken, refreshToken, params, profile, done) => {
+  //   if (req.user) {
+  //       User.findById(req.user.id, (err, user) => {
+  //         if (err) { return done(err); }
+  //         user.googleId = profile.id;
+  //         user.tokens.push({
+  //           kind: 'google',
+  //           accessToken,
+  //           accessTokenExpires: moment().add(params.expires_in, 'seconds').format(),
+  //           refreshToken,
+  //         });
+  //         user.firstName = profile.name.givenName;
+  //         user.lastName = profile.name.familyName;
+  //         user.save((err) => {
+  //           req.flash('info', { msg: 'Google account has been linked.' });
+  //           done(err, user);
+  //         });
+  //       });
+  //     } else {
+  //     User.findOne({ googleId: profile.id }, (err, existingUser) => {
+  //       if (err) { return done(err); }
+  //       if (existingUser) {
+  //         return done(null, existingUser);
+  //       }
+  //       User.findOne({ email: profile.emails[0].value }, (err, existingEmailUser) => {
+  //         if (err) { return done(err); }
+  //         if (existingEmailUser) {
+  //           req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Google manually from your user profile.' });
+  //           req.session.save(function(err) {   //Force the flash message to save first; then redirect in the callback; https://github.com/jaredhanson/connect-flash/issues/23#issuecomment-390593818
+  //             console.log('session saved');
+  //             done(err);
+  //           });
+  //         } else {
+  //           console.log(profile)
+  //           const user = new User();
+  //           user.email = profile.emails[0].value;
+  //           user.googleId = profile.id;
+  //           user.tokens.push({
+  //             kind: 'google',
+  //             accessToken,
+  //             accessTokenExpires: moment().add(params.expires_in, 'seconds').format(),
+  //             refreshToken,
+  //           });
+  //           user.firstName = profile.name.givenName;
+  //           user.lastName = profile.name.familyName;
+  //           user.save((err) => {
+  //             done(err, user);
+  //           });
+  //         }
+  //       });
+  //     });
+  //   }
+  // });
+  // passport.use('google', googleStrategyConfig);
+  // refresh.use('google', googleStrategyConfig);
 
     passport.serializeUser((user, done) => {
       done(null, user.id)

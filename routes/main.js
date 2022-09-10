@@ -22,16 +22,33 @@ router.post('/signup', authController.postSignup)
 router.post('/login', authController.postLogin)
 
 // GET /auth/google
-router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+// router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
 // GET /auth/google/callback
-router.get(
-  '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
+// router.post(
+//   '/auth/google/callback',
+//   passport.authenticate('google-one-tap', { failureRedirect: '/login' }),
+//   (req, res) => {
+//     res.redirect(`/users/${req.user._id}/dashboard`)
+//   }
+// )
+
+router.post(
+  "/auth/google/callback",
+  passport.authenticate(
+    "google-one-tap",
+    { failureRedirect: "/login" },
+    (err, user) => {
+      // Do whatever you need
+      console.log(err, 'failure in /routes/main.js POST to /auth/google/callback')
+    }
+  ),
+  function (req, res) {
+    console.log('success in /routes/main.js POST to /auth/google/callback')
+    // Successful authentication, redirect home.
     res.redirect(`/users/${req.user._id}/dashboard`)
   }
-)
+);
 
 //Change back from GET to DELETE
 //Handle DELETE requests to the /logout route - to logout/deauthenticate a use

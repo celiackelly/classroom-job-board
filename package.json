@@ -31,13 +31,13 @@
     "mongodb": "^4.9.1",
     "mongoose": "^6.5.4",
     "passport": "^0.6.0",
-    "passport-google-oauth20": "^2.0.0",
+    "passport-google-one-tap": "^1.0.0",
     "passport-local": "^1.0.0",
     "passport-oauth2-refresh": "^2.1.0",
+    "path": "^0.12.7",
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19"

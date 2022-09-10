@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express')
 const app = express()
+const path = require('path')
 const PORT = process.env.PORT
 const mongoose = require('mongoose')
 const passport = require('passport')
@@ -26,7 +27,7 @@ const usersRouter = require('./routes/users')
 app.set('view engine', 'ejs')
 app.set('layout', './layouts/layout')
 
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public'))) //Set up public folder to serve CSS, JS, and image files
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(expressLayouts)

@@ -7,6 +7,8 @@
         <!--Favicon-->
         <!-- <link rel="icon" type="image/x-icon" href="/img/skillet-favicon.png"/> -->
         <title> <%= title %> </title>
+        <!--Google Identity Services-->
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
         <!--Normalize-->
         <link rel="stylesheet" href="/css/normalize.css">
         <!--Font Awesome-->
@@ -23,5 +25,6 @@
             <%- body %>
         </main>    
         <%- include('../partials/footer.ejs') %>
+        <script src="/js/main.js"></script>
     </body>
 </html>
