@@ -13,21 +13,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navmenu">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
+                    <li class="nav-item px-1">
                         <a class="nav-link" href="/about">About</a>
                     </li>
                     <% if (!currentUser) { %>
-                            <li class="nav-item">
+                            <li class="nav-item px-1">
                                 <a class="nav-link" href="/login">Log in</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item px-1">
                                 <a class="nav-link btn btn-cta" href="/signup">Sign up</a>
                             </li>
                         <% } else { %>
-                            <li class="nav-item">
+                            <li class="nav-item px-1">
                                 <a class="nav-link" href="/users/<%-currentUser._id %>/dashboard">Dashboard</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item px-1">
                                 <a class="nav-link btn btn-cta" href="/logout?_method=DELETE">Log out</a>
                             </li>
                         <% } %>
