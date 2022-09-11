@@ -5,7 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--Favicon-->
-        <!-- <link rel="icon" type="image/x-icon" href="/img/skillet-favicon.png"/> -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
         <title> <%= title %> </title>
         <!--Normalize-->
         <link rel="stylesheet" href="/css/normalize.css">
@@ -16,18 +19,19 @@
         <!--Google Fonts-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
         <!--Main Stylesheet-->
         <link rel="stylesheet" href="/css/style.css">
     </head>
-    <body>
+    <body class="min-vh-100 d-flex flex-column">
         <%- include('../partials/header.ejs') %>
-        <main>
+        <main class="flex-grow-1">
             <%- include('../partials/errorMessage.ejs') %>
             <%- body %>
         </main>    
         <%- include('../partials/footer.ejs') %>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+        <script src="/js/main.js"></script>
     </body>
 </html>

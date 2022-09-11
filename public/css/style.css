@@ -1,31 +1,89 @@
 /* CSS HEX */
-/* --safety-yellow: #F4D836ff;
---old-burgundy: #2D1A18ff;
---pacific-blue: #0AB4D1ff;
---non-photo-blue: #B0E8F9ff; 
+/* --safety-yellow: #F4D836;
+--pacific-blue: #0AB4D1;
 */
 
-.navbar-brand span{
+
+/* General */
+
+body {
+    background-color: #E6F4F1;
+}
+
+/* Typography */
+
+h1 {
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Saira Condensed', sans-serif;
+}
+
+h1 + p {
+    font-weight: 600;
+}
+
+
+/* Buttons */
+
+.btn-cta {
+    background-color: #F4D836ff;
+    color: #000;
+    font-weight: 600;
+}
+
+/* Header / Navbar */
+
+.navbar {
+    background-color: #0AB4D1;
+}
+
+.navbar-brand span {
     text-transform: uppercase;
     font-weight: 600;
-    font-family: "Rubik";
+    font-family: 'Saira Condensed', sans-serif;
     vertical-align: middle;
-    color: #0AB4D1ff;
+    /* color: #0AB4D1ff; */
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
 }
 
 .navbar-brand img {
-    width: 3rem;
-    padding: .25rem;
-    border-radius: 100%;
-    background-color: #0AB4D1ff;
+    width: 2rem;
+    filter: drop-shadow(1px 1px 2px rgb(0 0 0 / 0.7));
+    /* padding: .25rem;
+    border-radius: 100%; */
+    /* background-color: #0AB4D1ff; */
 }
 
-/* nav {
-    background-color: rgb(184, 229, 243);
-} */
-
-
-.section-hero {
-    padding-top: 0;
-    padding-bottom: 0;
+.nav-link:not(.btn-cta) {
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
 }
+
+
+/* Homepage Page */
+
+    /* Hero Section */
+    .section-hero {
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: #0AB4D1ff;
+    }
+
+    /* Cards */
+    .card-img-top {
+        width: 40%;
+        margin: auto;
+        object-fit: cover;
+    }
+
+    .card {
+        height: 100%;
+    }
+
+
+
+

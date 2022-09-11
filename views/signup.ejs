@@ -1,8 +1,51 @@
-<form action="/signup" method="POST">
+<!-- <form action="/signup" method="POST">
     <input type="text" name="firstName" placeholder="First Name">
     <input type="text" name="lastName" placeholder="Last Name">
     <input type="email" name="email" placeholder="Email">
     <input type="password" name="password" placeholder="Password">
     <input type="password" name="confirmPassword" placeholder="Confirm Password">
     <input type="submit">
-</form>
+</form> -->
+
+<div class="container-fluid  mt-5 pt-5">
+    <section class="row justify-content-center">
+        <h3 class="text-center">Sign up</h3>
+        <!--Login by sending a POST request to the /auth route-->
+        <form action="/signup" method="POST" class="col-md-6">
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="firstNameInput" name="firstName" required placeholder="First Name">
+                <label for="firstNameInput">First Name</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="lastNameInput" name="lastName" required placeholder="Last Name">
+                <label for="lastNameInput">Last Name</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="emailInput" name="email" required placeholder="name@example.com">
+                <label for="emailInput">Email</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="passwordInput" name="password" placeholder="password">
+                <label for="passwordInput">Password</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="confirmPasswordInput" name="confirmPassword" placeholder="password">
+                <label for="confirmPasswordInput">Confirm Password</label>
+            </div>
+
+            <button type="submit" class="btn btn-cta">Sign up</button>
+            <a href="/login">Already have an account? Login</a><br>
+            <a href="/auth/google">Or Sign Up with Google</a>
+
+            <!-- <div>
+                <a href="/auth/google" class="btn red darken-1">
+                <i class="fab fa-google left"></i>Log In With Google</a>
+            </div> -->
+        </form>
+    </section>
+</div>
