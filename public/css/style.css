@@ -1,0 +1,31 @@
+/* CSS HEX */
+/* --safety-yellow: #F4D836ff;
+--old-burgundy: #2D1A18ff;
+--pacific-blue: #0AB4D1ff;
+--non-photo-blue: #B0E8F9ff; 
+*/
+
+.navbar-brand span{
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: "Rubik";
+    vertical-align: middle;
+    color: #0AB4D1ff;
+}
+
+.navbar-brand img {
+    width: 3rem;
+    padding: .25rem;
+    border-radius: 100%;
+    background-color: #0AB4D1ff;
+}
+
+/* nav {
+    background-color: rgb(184, 229, 243);
+} */
+
+
+.section-hero {
+    padding-top: 0;
+    padding-bottom: 0;
+}

@@ -33,9 +33,8 @@ router.get(
   }
 )
 
-//Change back from GET to DELETE
 //Handle DELETE requests to the /logout route - to logout/deauthenticate a use
 //Custom middleware in server.js handles overriding the link's GET method
-router.get('/logout', authController.logout)
+router.delete('/logout', authController.logout)
 
 module.exports = router

@@ -52,6 +52,19 @@ app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
   next();
 });
+
+//Middleware to override a link's GET method with DELETE 
+//Must use the query parameter _method (e.g.: href="/logout?_method=DELETE")
+app.use( function( req, res, next ) {
+  // if _method is a query parameter...
+  if ( req.query._method == 'DELETE' ) {
+      // change the original METHOD into DELETE method 
+      req.method = 'DELETE';
+      // and set requested url to the path
+      req.url = req.path;
+  }       
+  next(); 
+});
   
 app.use('/', mainRouter)
 app.use('/users', usersRouter)
