@@ -34,6 +34,31 @@ h1 + p {
     font-weight: 600;
 }
 
+.btn-google {
+    color: #545454;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 1px #ddd;
+    font-family: 'Roboto', sans-serif;
+}
+.btn-google:hover {
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 1px #ddd;
+    border: none;
+}
+
+.or-divider {
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid #000; 
+    line-height: 0.1em;
+    margin: 10px 0 20px; 
+ } 
+ 
+.or-divider span { 
+    background: #E6F4F1; 
+    padding: 0 10px; 
+}
+
 /* Header / Navbar */
 
 .navbar {
