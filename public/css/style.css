@@ -45,7 +45,6 @@ h1 + p {
     font-weight: 600;
     font-family: 'Saira Condensed', sans-serif;
     vertical-align: middle;
-    /* color: #0AB4D1ff; */
     color: #fff;
     text-shadow: 1px 1px 2px #000;
 }
@@ -53,9 +52,6 @@ h1 + p {
 .navbar-brand img {
     width: 2rem;
     filter: drop-shadow(1px 1px 2px rgb(0 0 0 / 0.7));
-    /* padding: .25rem;
-    border-radius: 100%; */
-    /* background-color: #0AB4D1ff; */
 }
 
 .nav-link:not(.btn-cta) {
@@ -68,9 +64,11 @@ h1 + p {
 }
 
 /* Footer */
-
 footer a {
-    color: #F4D836ff;
+    color: #0AB4D1;
+}
+footer i {
+    font-size: 1.5rem;
 }
 
 /* Homepage Page */
