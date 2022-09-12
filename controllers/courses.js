@@ -1,4 +1,5 @@
 const Course = require('../models/Course')
+const googleApi = require("../utils/google-api")
 
 module.exports = {
     createCourse: async (req, res) => {
@@ -9,11 +10,11 @@ module.exports = {
                 userId: request.user._id, 
             })
             console.log('Course Added') 
-            response.redirect(303, `/users/${req.user._id}/dashboard`)
+            response.redirect(303, `/users/dashboard`)
         } catch(err) {
             console.log(err)
             req.flash('errors', { msg: 'Unable to create course.' })
-            res.redirect(303, `/users/${req.user._id}/dashboard`)
+            res.redirect(303, `/users/dashboard`)
         }
     },
     importCourses: async (req, res) => {
@@ -26,11 +27,11 @@ module.exports = {
             //     userId: request.user._id
             // })
             console.log('Courses Imported from Google Classroom') 
-            response.redirect(303, `/users/${req.user._id}/dashboard`)
+            response.redirect(303, `/users/dashboard`)
         } catch(err) {
             console.log(err)
             req.flash('errors', { msg: 'Unable to import courses from Google Classroom.' })
-            res.redirect(303, `/users/${req.user._id}/dashboard`)
+            res.redirect(303, `/users/dashboard`)
         }
     },
     

@@ -1,6 +1,5 @@
 const User = require('../models/User')
 const Course = require('../models/Course')
-const googleApi = require("../utils/google-api")
 
 module.exports = {
     getDashboard: async (req, res) => {
