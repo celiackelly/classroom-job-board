@@ -3,7 +3,7 @@ const google = require("googleapis").google
 const googleConfig = {
   clientId: process.env.GOOGLE_OAUTH_ID,
   clientSecret: process.env.GOOGLE_OAUTH_SECRET,
-  redirect: process.env.GOOGLE_OAUTH_REDIRECT,
+  redirect: process.env.GOOGLE_OAUTH_CALLBACK,
 };
 
 const createConnection = () => {
@@ -30,7 +30,7 @@ const getConnectionUrl = (auth) => {
  * Exported functions
  */
 
-module.exports.loginUrl = () => {
+module.exports.authUrl = () => {
   const auth = createConnection()
   return getConnectionUrl(auth)
 }

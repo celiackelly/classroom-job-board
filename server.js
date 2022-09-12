@@ -22,6 +22,7 @@ connectDB();
 
 const mainRouter = require('./routes/main')
 const usersRouter = require('./routes/users')
+const coursesRouter = require('./routes/courses')
 
 app.set('view engine', 'ejs')
 app.set('layout', './layouts/layout')
@@ -68,6 +69,7 @@ app.use( function( req, res, next ) {
   
 app.use('/', mainRouter)
 app.use('/users', usersRouter)
+app.use('/courses', coursesRouter)
  
 app.listen(process.env.PORT || PORT, ()=>{
   console.log(`Server running on port ${PORT}`)

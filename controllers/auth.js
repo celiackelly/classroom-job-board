@@ -30,8 +30,7 @@ const User = require('../models/User')
       }
       req.logIn(user, (err) => {
         if (err) { return next(err) }
-        //This success message does not show up. How to fix? 
-        req.flash('success', { msg: 'Success! You are logged in.' })
+        // req.flash('success', { msg: 'Success! You are logged in.' })
         res.redirect(req.session.returnTo || `users/${req.user._id}/dashboard`)
       })
     })(req, res, next)

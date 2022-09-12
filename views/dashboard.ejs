@@ -1,1 +1,9 @@
 <h1>Welcome, <%= user.firstName %> </h1>
+
+<h1>Your Courses</h1>
+<% courses.forEach(course => { %>
+    <p><%= course.name %></p>
+    <a href="/dashboard/courses/<%= course.id %>">View Roster</a>
+    <a href="<%= course.alternateLink %>">View on Google Classroom</a>
+    <% })
+%>
