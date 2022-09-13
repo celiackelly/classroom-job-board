@@ -101,9 +101,12 @@ footer i {
 
     /* Hero Section */
     .section-hero {
-        padding-top: 0;
-        padding-bottom: 0;
+        padding: 0;
         background-color: #FFF;
+    }
+
+    #section-hero-text-container {
+        padding: 0 3rem 0 2rem;
     }
 
     /* Cards */
