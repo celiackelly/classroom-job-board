@@ -3,7 +3,7 @@ const google = require("googleapis").google
 const googleConfig = {
   clientId: process.env.GOOGLE_OAUTH_ID,
   clientSecret: process.env.GOOGLE_OAUTH_SECRET,
-  redirect: process.env.GOOGLE_OAUTH_CALLBACK,
+  redirect: process.env.GOOGLE_API_REDIRECT,
 };
 
 const createConnection = () => {

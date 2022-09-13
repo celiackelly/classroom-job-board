@@ -33,6 +33,11 @@ router.get(
   }
 )
 
+// GET /auth/google/api 
+// For Google Classroom authentication
+
+
+
 //Handle DELETE requests to the /logout route - to logout/deauthenticate a use
 //Custom middleware in server.js handles overriding the link's GET method
 router.delete('/logout', authController.logout)

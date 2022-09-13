@@ -1,9 +1,62 @@
 <h1>Welcome, <%= user.firstName %> </h1>
+<section>
+    <h2>Your Classes</h2>
+    <% if (courses.length) { %>
+        <% courses.forEach(course => { %>
+            <p><%= course.name %></p>
+            <a href="/dashboard/courses/<%= course.id %>">View Roster</a>
+            <a href="<%= course.alternateLink %>">View on Google Classroom</a>
+            <% })
+        %>
+        <%} else { %> 
+            <p> Add a class to get started.</p>
+        <%}
+    %> 
+    <div>
+        <!-- Add a Class Button triggers modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClassModal">Add a Class</button>
+        <button type="button" id="import-courses-button">Import from Google Classroom</button>
+    </div>
+</section>
 
-<h1>Your Courses</h1>
-<% courses.forEach(course => { %>
-    <p><%= course.name %></p>
-    <a href="/dashboard/courses/<%= course.id %>">View Roster</a>
-    <a href="<%= course.alternateLink %>">View on Google Classroom</a>
-    <% })
-%>
+<!-- Modal- Add a Class -->
+<div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addClassModalTitle">Add a Class</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="/courses" method="POST" id="addClassForm">
+
+                <fieldset class="pb-4">
+                    <legend id="classNameLegend">Class Name</legend>
+                        <input type="text" class="form-control" name="className" required placeholder="3rd Grade Math" aria-labelledby="classNameLegend">
+                </fieldset>
+                <fieldset>
+                    <legend>Students</legend>
+                    <div class="text-center" id="student-inputs-container">
+                        <div class="row g-3 py-2 align-items-center justify-content-center student-name-inputs" id="student-1">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" name="studentFName[]" placeholder="First Name" ariaLabel="first name">
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" name="studentLName[]" placeholder="Last Name" ariaLabel="last name">
+                            </div>
+                        </div>
+                        <i class="fa-sharp fa-solid fa-circle-plus" id="add-student-row-btn"></i>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" form="addClassForm" class="btn btn-primary">Submit</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="/js/dashboardFunctions.js"></script>
