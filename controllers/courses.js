@@ -1,16 +1,29 @@
 const Course = require('../models/Course')
+const Student = require('../models/Student')
 const googleApi = require("../utils/google-api")
 
 module.exports = {
     createCourse: async (req, res) => {
         try {
-            await Course.create({
-                name: req.body.name,
-                students: req.body.students,
-                userId: request.user._id, 
+            const course = await Course.create({
+                name: req.body.className,
+                userId: req.user._id, 
             })
+
+            const studentFNames = req.body.studentFName
+            const studentLNames = req.body.studentLName
+            const studentList = studentFNames.map((fname, i) => [fname, studentLNames[i]])
+
+            const students = await studentList.forEach(studentName => {
+                Student.create({
+                    firstName: studentName[0], 
+                    lastName: studentName[1], 
+                    enrolledInCourse: course._id
+                })
+            })
+
             console.log('Course Added') 
-            response.redirect(303, `/users/dashboard`)
+            res.redirect(303, `/users/dashboard`)
         } catch(err) {
             console.log(err)
             req.flash('errors', { msg: 'Unable to create course.' })
@@ -27,7 +40,7 @@ module.exports = {
             //     userId: request.user._id
             // })
             console.log('Courses Imported from Google Classroom') 
-            response.redirect(303, `/users/dashboard`)
+            res.redirect(303, `/users/dashboard`)
         } catch(err) {
             console.log(err)
             req.flash('errors', { msg: 'Unable to import courses from Google Classroom.' })

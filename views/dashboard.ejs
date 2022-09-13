@@ -1,11 +1,16 @@
-<h1>Welcome, <%= user.firstName %> </h1>
-<section>
+<section class="container-fluid">
+    <h1>Welcome, <%= user.firstName %> </h1>
+</section>
+<section class="container-fluid">
     <h2>Your Classes</h2>
     <% if (courses.length) { %>
         <% courses.forEach(course => { %>
             <p><%= course.name %></p>
             <a href="/dashboard/courses/<%= course.id %>">View Roster</a>
-            <a href="<%= course.alternateLink %>">View on Google Classroom</a>
+            <% if (course.importedFromGoogle) { %>
+                <a href="<%= course.alternateLink %>">View on Google Classroom</a>
+                <% } 
+            %>
             <% })
         %>
         <%} else { %> 
