@@ -28,6 +28,10 @@ h1 + p {
     font-weight: 600;
 }
 
+.btn-primary {
+    background-color: #1371DE; 
+}
+
 .btn-google {
     color: #545454;
     background-color: #FFF;
