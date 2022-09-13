@@ -1,20 +1,14 @@
-/* CSS HEX */
-/* --safety-yellow: #F4D836;
---pacific-blue: #0AB4D1;
-*/
-
 
 /* General */
 
 body {
-    background-color: #E6F4F1;
+    background-color: #DDEDFF;
 }
 
 /* Typography */
 
 h1 {
-    color: #fff;
-    text-shadow: 1px 1px 2px #000;
+    color: #1371DE;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -29,20 +23,20 @@ h1 + p {
 /* Buttons */
 
 .btn-cta {
-    background-color: #F4D836ff;
+    background-color: #F4D836;
     color: #000;
     font-weight: 600;
 }
 
 .btn-google {
     color: #545454;
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px 1px #ddd;
+    background-color: #FFF;
+    box-shadow: 0 1px 2px 1px #DDD;
     font-family: 'Roboto', sans-serif;
 }
 .btn-google:hover {
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px 1px #ddd;
+    background-color: #FFF;
+    box-shadow: 0 1px 2px 1px #DDD;
     border: none;
 }
 
@@ -55,14 +49,19 @@ h1 + p {
  } 
  
 .or-divider span { 
-    background: #E6F4F1; 
+    background: #DDEDFF; 
     padding: 0 10px; 
+}
+
+.fa-circle-plus {
+    color: #1371DE;
+    font-size: 2rem;
 }
 
 /* Header / Navbar */
 
 .navbar {
-    background-color: #0AB4D1;
+    background-color: #1371DE;
 }
 
 .navbar-brand span {
@@ -70,18 +69,15 @@ h1 + p {
     font-weight: 600;
     font-family: 'Saira Condensed', sans-serif;
     vertical-align: middle;
-    color: #fff;
-    text-shadow: 1px 1px 2px #000;
+    color: #FFF;
 }
 
 .navbar-brand img {
     width: 2rem;
-    filter: drop-shadow(1px 1px 2px rgb(0 0 0 / 0.7));
 }
 
 .nav-link:not(.btn-cta) {
-    color: #fff;
-    text-shadow: 1px 1px 2px #000;
+    color: #FFF;
 }
 
 .navbar-collapse {
@@ -89,9 +85,14 @@ h1 + p {
 }
 
 /* Footer */
-footer a {
-    color: #0AB4D1;
+footer a, footer span {
+    color: #DDEDFF;
 }
+
+footer a:hover {
+    color: #1371DE;
+}
+
 footer i {
     font-size: 1.5rem;
 }
@@ -102,7 +103,7 @@ footer i {
     .section-hero {
         padding-top: 0;
         padding-bottom: 0;
-        background-color: #0AB4D1ff;
+        background-color: #FFF;
     }
 
     /* Cards */
@@ -116,9 +117,5 @@ footer i {
         height: 100%;
     }
 
-.fa-circle-plus {
-    color: #0AB4D1;
-    font-size: 2rem;
-}
 
 

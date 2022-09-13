@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
+//Change this to TEACHER here and everywhere? Including in route, controller
 const userSchema = new mongoose.Schema({
   firstName: { type: String},
   lastName: { type: String},
