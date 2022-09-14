@@ -10,11 +10,12 @@ const jobSchema = new mongoose.Schema({
     }, 
     description: {
         type: String,
+        maxLength: 300,         //add a validator message?
         required: true,
     },
     gradeLevels: {
         type: [{ type: String }],
-        maxLength: 300,         //add a validator message? 
+        required: true,
     },
     // createdBy: {
     //     type: mongoose.Schema.Types.ObjectId, ref: 'User', 
@@ -25,6 +26,6 @@ const jobSchema = new mongoose.Schema({
     //     default: false,
     //     required: true,
     // },
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('Job', jobSchema)
