@@ -57,9 +57,21 @@ h1 + p {
     padding: 0 10px; 
 }
 
-.fa-circle-plus {
+.btn.fa-circle-plus {
     color: #1371DE;
     font-size: 2rem;
+    border-radius: 100;
+    border: none;
+}
+
+.btn.fa-circle-plus:hover {
+    color: #35ecb5;
+}
+
+.btn.fa-circle-plus:focus {
+    color: #35ecb5;
+    border: 1px solid #1371DE;
+    outline: #DDEDFF solid 3px;
 }
 
 /* Header / Navbar */

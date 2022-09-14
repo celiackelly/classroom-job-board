@@ -1,0 +1,11 @@
+<h1>This is a course page for <%= course.name %></h1>
+
+<% if (students.length) { %>
+    <% students.forEach(student => { %>
+        <p><%= student.firstName %> <%= student.lastName %></p>
+        <% })
+    %>
+    <%} else { %> 
+        <p> Add a class to get started.</p>
+    <%}
+%> 

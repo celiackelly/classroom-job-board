@@ -47,7 +47,6 @@ module.exports = {
             res.redirect(303, `/users/dashboard`)
         }
     },
-    
 
     // deleteDish: async (request, response) => {
     //     try {

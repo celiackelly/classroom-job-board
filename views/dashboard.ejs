@@ -6,7 +6,7 @@
     <% if (courses.length) { %>
         <% courses.forEach(course => { %>
             <p><%= course.name %></p>
-            <a href="/dashboard/courses/<%= course.id %>">View Roster</a>
+            <a href="/users/courses/<%= course.id %>">View Roster</a>
             <% if (course.importedFromGoogle) { %>
                 <a href="<%= course.alternateLink %>">View on Google Classroom</a>
                 <% } 
@@ -50,7 +50,7 @@
                                 <input type="text" class="form-control" name="studentLName[]" placeholder="Last Name" ariaLabel="last name">
                             </div>
                         </div>
-                        <i class="fa-sharp fa-solid fa-circle-plus" id="add-student-row-btn"></i>
+                        <button type="button" class="fa-sharp fa-solid fa-circle-plus btn" id="add-student-row-btn"></button>
                     </div>
 
                 </fieldset>
