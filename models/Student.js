@@ -16,6 +16,14 @@ const studentSchema = new mongoose.Schema({
     currentJob: { 
         type: mongoose.Schema.Types.ObjectId, ref: 'Job', 
     },
+    //not quite sure how to model jobHistory yet...
+    jobHistory: [{
+        jobHeld: { 
+            type: mongoose.Schema.Types.ObjectId, ref: 'Job', 
+            required: true }, 
+        startedOn: Date, 
+        endedOn: Date
+    }]
 }, { timestamps: true })
 
 module.exports = mongoose.model('Student', studentSchema)
