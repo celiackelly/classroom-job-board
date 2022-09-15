@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 //add in optional picture? 
-//pubic/sharing functions - use Mongoose model.discriminator() ?
+//public/sharing functions - use Mongoose model.discriminator() ?
 
 const jobSchema = new mongoose.Schema({
     title: {

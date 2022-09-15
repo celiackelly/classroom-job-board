@@ -4,16 +4,19 @@
 <section class="container-fluid px-5">
     <h2>Your Classes</h2>
     <% if (courses.length) { %>
-        <% courses.forEach(course => { %>
-            <p><%= course.name %></p>
-            <a href="/users/courses/<%= course.id %>">View Roster</a>
-            <% if (course.importedFromGoogle) { %>
-                <a href="<%= course.alternateLink %>">View on Google Classroom</a>
-                <% } 
+        <ul>
+            <% courses.forEach(course => { %>
+                <li>    
+                    <a href="/users/courses/<%= course.id %>"><%= course.name %></a>
+                    <% if (course.importedFromGoogle) { %>
+                        <a href="<%= course.alternateLink %>">View on Google Classroom</a>
+                        <% } 
+                    %>
+                </li>
+                <% })
             %>
-            <% })
-        %>
-        <%} else { %> 
+        </ul>
+    <%} else { %> 
             <p> Add a class to get started.</p>
         <%}
     %> 
