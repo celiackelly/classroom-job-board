@@ -9,6 +9,9 @@ const { ensureGuest } = require('../middleware/auth')
 //GET home page (index.ejs)
 router.get('/', homeController.getIndex)
 
+//GET About page 
+router.get('/', homeController.getAbout)
+
 //GET sign-up page
 router.get('/signup', ensureGuest, authController.getSignup)
 

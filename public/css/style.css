@@ -5,6 +5,11 @@ body {
     background-color: #DDEDFF;
 }
 
+.blue-bg {
+    background-color: #1371DE;
+    color: #FFF;
+}
+
 /* Typography */
 
 h1 {

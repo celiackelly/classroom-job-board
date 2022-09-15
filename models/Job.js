@@ -17,15 +17,16 @@ const jobSchema = new mongoose.Schema({
         type: [{ type: String }],
         required: true,
     },
-    // createdBy: {
-    //     type: mongoose.Schema.Types.ObjectId, ref: 'User', 
-    //     // required: true,
-    // },
-    // isPublic: {
-    //     type: Boolean,
-    //     default: false,
-    //     required: true,
-    // },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'User', 
+    },
+    isPublic: {
+        type: Boolean,
+        default: false,
+        required: true,
+    },
 }, { timestamps: true })
 
 module.exports = mongoose.model('Job', jobSchema)
+
+//What to do about the timestamps for jobs I add by batch JSON import? 
