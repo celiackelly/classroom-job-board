@@ -15,6 +15,7 @@ const courseSchema = new mongoose.Schema({
         default: false,
         required: true,
     },
+    //add jobList? 
 }, { timestamps: true })
 
 module.exports = mongoose.model('Course', courseSchema)

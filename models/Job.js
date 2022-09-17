@@ -17,13 +17,13 @@ const jobSchema = new mongoose.Schema({
         type: [{ type: String }],
         required: true,
     },
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User', 
-    },
     isPublic: {
         type: Boolean,
         default: false,
         required: true,
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'User', 
     },
 }, { timestamps: true })
 
