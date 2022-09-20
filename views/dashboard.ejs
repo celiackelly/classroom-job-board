@@ -2,28 +2,37 @@
     <h1>Welcome, <%= user.firstName %> </h1>
 </section>
 <section class="container-fluid px-5">
-    <h2>Your Classes</h2>
-    <% if (courses.length) { %>
-        <ul>
-            <% courses.forEach(course => { %>
-                <li>    
-                    <a href="/users/courses/<%= course.id %>"><%= course.name %></a>
-                    <% if (course.importedFromGoogle) { %>
-                        <a href="<%= course.alternateLink %>">View on Google Classroom</a>
-                        <% } 
-                    %>
-                </li>
-                <% })
-            %>
-        </ul>
-    <%} else { %> 
-            <p> Add a class to get started.</p>
-        <%}
-    %> 
-    <div>
-        <!-- Add a Class Button triggers modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClassModal">Add a Class</button>
-        <button type="button" class="btn btn-primary" disabled id="import-courses-button">Import from Google Classroom</button>
+    <div class="col-12 col-lg-8 mx-auto">
+        <div class="d-flex justify-content-between pb-2">
+            <h2>Your Classes</h2>
+            <!-- Add a Class Button triggers modal -->
+            <div>
+                <button type="button" class="btn btn-primary text-nowrap" data-bs-toggle="modal" data-bs-target="#addClassModal">Add a Class</button>
+                <button type="button" class="btn btn-primary text-nowrap" disabled id="import-courses-button">Import from Google</button>
+            </div>
+        </div>
+        <% if (courses.length) { %>
+            <ul class="px-0">
+                <% courses.forEach(course => { %>
+                    <li class="list-style-none py-1">
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title"><a href="/users/courses/<%= course.id %>"><%= course.name %></a></h5>
+                              <h6 class="card-subtitle mb-2 text-muted"><%= course.studentCount %> students</h6>
+                              <% if (course.importedFromGoogle) { %>
+                                <a href="<%= course.alternateLink %>">View on Google Classroom</a>
+                                <% } 
+                            %>
+                            </div>
+                          </div>    
+                    </li>
+                    <% })
+                %>
+            </ul>
+        <%} else { %> 
+                <p> Add a class to get started.</p>
+            <%}
+        %> 
     </div>
 </section>
 

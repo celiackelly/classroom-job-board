@@ -5,7 +5,7 @@ const courseSchema = new mongoose.Schema({
         type: String, 
         required: true
     }, 
-    // students: [{ type : mongoose.Schema.Types.ObjectId, ref: 'Student' }],
+    students: [{ type : mongoose.Schema.Types.ObjectId, ref: 'Student' }],
     userId: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User', 
         required: true,

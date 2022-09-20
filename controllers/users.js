@@ -5,7 +5,11 @@ const Student = require('../models/Student')
 module.exports = {
     getDashboard: async (req, res) => {
         try {
-            const courses = await Course.find({userId: req.user.id})
+            const courses = await Course.find({userId: req.user.id}).exec()
+            courses.forEach(course => {
+                course.studentCount = course.students.length
+                console.log(course.studentCount)
+            })
             res.render('dashboard', { title: 'Dashboard', user: req.user, courses})
         } catch(err) {
             console.log(err)

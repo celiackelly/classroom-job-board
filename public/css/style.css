@@ -118,6 +118,12 @@ footer i {
     font-size: 1.5rem;
 }
 
+/* List Styling */
+
+.list-style-none {
+    list-style-type: none;
+}
+
 /* Homepage Page */
 
     /* Hero Section */
