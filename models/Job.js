@@ -8,25 +8,23 @@ const jobSchema = new mongoose.Schema({
         type: String, 
         required: true
     }, 
-    description: {
-        type: String,
-        maxLength: 300,         //add a validator message?
+    duties: {
+        type: [String],
         required: true,
     },
-    gradeLevels: {
-        type: [{ type: String }],
-        required: true,
-    },
-    isPublic: {
-        type: Boolean,
-        default: false,
-        required: true,
-    },
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User', 
-    },
-}, { timestamps: true })
+    // gradeLevels: {
+    //     type: [{ type: String }],
+    //     required: true,
+    // },
+    // isPublic: {
+    //     type: Boolean,
+    //     default: false,
+    //     required: true,
+    // },
+    // createdBy: {
+    //     type: mongoose.Schema.Types.ObjectId, ref: 'User', 
+    // },
+})
 
 module.exports = mongoose.model('Job', jobSchema)
-
-//What to do about the timestamps for jobs I add by batch JSON import? 
+ 

@@ -1,7 +1,7 @@
 <section class="container-fluid p-5">
-    <h1>Welcome, <%= user.firstName %> </h1>
-</section>
-<section class="container-fluid px-5">
+    <div class="col-12 col-lg-8 mx-auto pb-5">
+        <h1>Welcome, <%= user.firstName %> </h1>
+    </div>
     <div class="col-12 col-lg-8 mx-auto">
         <div class="d-flex justify-content-between pb-2">
             <h2>Your Classes</h2>
@@ -62,7 +62,7 @@
                                 <input type="text" class="form-control" name="studentLName[]" placeholder="Last Name" ariaLabel="last name">
                             </div>
                         </div>
-                        <button type="button" class="fa-sharp fa-solid fa-circle-plus btn" id="add-student-row-btn"></button>
+                        <button type="button" class="fa-sharp fa-solid fa-circle-plus btn btn-outline-primary" id="add-student-row-btn" aria-label="Add another student"></button>
                     </div>
 
                 </fieldset>

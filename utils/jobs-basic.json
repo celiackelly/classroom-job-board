@@ -1,6 +1,16 @@
 [{
-    "title": "", 
-    "description": "", 
-    "gradeLevels": [""], 
-    "isPublic": "true"
+    "title": "Line Leader", 
+    "duties": ["Lead the class down the hall calmly and responsibly.", "Watch and listen for the teacher’s directions and stop the line whenever directed."]
+},
+{
+    "title": "Paper Passer", 
+    "duties": ["Pass out and collect papers in an orderly fashion when the teacher asks for help."]
+}, 
+{
+    "title": "Tech Support", 
+    "duties": ["Help other students with logging in, accessing websites for class activities, and submitting online assignments.", "Help the teacher troubleshoot tech issues when they ask for help."]
+}, 
+{
+    "title": "Botanist", 
+    "duties": ["Waters the classroom plants on schedule.", "Cleans up dead leaves and spilled dirt around the plants."]
 }]

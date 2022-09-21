@@ -3,47 +3,6 @@ const Student = require('../models/Student')
 const googleApi = require("../utils/google-api")
 
 module.exports = {
-    // createCourse: async (req, res) => {
-    //     try {
-    //         const course = await Course.create({
-    //             name: req.body.className,
-    //             userId: req.user._id, 
-    //         })
-    //         const courseId = course._id
-    //         const studentFNames = req.body.studentFName
-    //         const studentLNames = req.body.studentLName
-    //         const studentList = studentFNames.map((fname, i) => [fname, studentLNames[i]])
-
-    //         //forEach has an empty return value
-    //         await studentList.forEach(studentName => {
-    //             Student.create({
-    //                 firstName: studentName[0], 
-    //                 lastName: studentName[1], 
-    //                 enrolledInCourse: course._id
-    //             })
-    //         })
-    //         console.log(course, students)
-    //         console.log('Course Added') 
-    //         res.redirect(303, `/users/dashboard`)
-    //     } catch(err) {
-    //         console.log(err)
-    //         req.flash('errors', { msg: 'Unable to create course.' })
-    //         res.redirect(303, `/users/dashboard`)
-    //     }
-    // },
-
-    // studentList.forEach(studentName => {
-    //     Student.create({
-    //         firstName: studentName[0], 
-    //         lastName: studentName[1], 
-    //         enrolledInCourse: course._id
-    //     }).then(student => {
-    //         console.log('student', student)
-    //         course.students.push(student._id)
-    //     })
-    // })
-    // await course.save()
-
     createCourse: async (req, res) => {
         try {
             const course = await Course.create({

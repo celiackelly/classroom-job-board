@@ -20,6 +20,7 @@ module.exports = {
     getCourse: async (req, res) => {
         try {
             const course = await Course.findById(req.params.courseId).lean()
+            //refactor with .populate?
             const students = await Student.find({ enrolledInCourse: req.params.courseId }).lean()
             res.render('course', {title: 'Course', course, students})
         } catch (err) {
