@@ -2,6 +2,10 @@
     "title": "Line Leader", 
     "duties": ["Lead the class down the hall calmly and responsibly.", "Watch and listen for the teacher’s directions and stop the line whenever directed."]
 },
+ {
+    "title": "Caboose",    
+    "duties": ["Be the last person in line as the class walks down the hall.", "Make sure that the line stays straight and that students stay together."]
+},
 {
     "title": "Paper Passer", 
     "duties": ["Pass out and collect papers in an orderly fashion when the teacher asks for help."]
@@ -13,4 +17,36 @@
 {
     "title": "Botanist", 
     "duties": ["Waters the classroom plants on schedule.", "Cleans up dead leaves and spilled dirt around the plants."]
-}]
+}, 
+{
+    "title": "Absentee Assistant",    
+    "duties": ["Records classwork and homework assignments on the designated form.", "Collects any handouts and places them with the form in the Absentee Folder.", "Helps absent students understand what they missed when they return."]
+},
+{
+    "title": "Brain Break Chooser",    
+    "duties": ["Remind the teacher when it is time for a brain break.", "Choose the activity for the class's brain break, from the list of options."]
+},
+{
+    "title": "Bathroom Monitor",    
+    "duties": ["Monitor the bathroom to make sure that no more than three students are in the bathroom at a time.", "Check the bathroom before each group enters and after they leave, to make sure students have cleaned up after themselves."]
+},
+{
+    "title": "Lunch Monitor",    
+    "duties": ["Check that students have wiped their table clean of crumbs and other messes.", "Check for trash and other messes under tables and chairs.", "Let the teacher know when each table is cleaned up and ready to be dismissed."]
+},
+{
+    "title": "",    
+    "duties": [""]
+},
+{
+    "title": "",    
+    "duties": [""]
+},
+{
+    "title": "",    
+    "duties": [""]
+},
+{
+    "title": "",    
+    "duties": [""]
+},]  
