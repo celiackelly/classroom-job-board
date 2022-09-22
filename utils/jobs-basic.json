@@ -8,7 +8,7 @@
 },
 {
     "title": "Paper Passer", 
-    "duties": ["Pass out and collect papers in an orderly fashion when the teacher asks for help."]
+    "duties": ["Pass out and collect papers efficiently.", "Place collected papers and extra copies in the designated folders."]
 }, 
 {
     "title": "Tech Support", 
@@ -20,7 +20,7 @@
 }, 
 {
     "title": "Absentee Assistant",    
-    "duties": ["Records classwork and homework assignments on the designated form.", "Collects any handouts and places them with the form in the Absentee Folder.", "Helps absent students understand what they missed when they return."]
+    "duties": ["Records classwork and homework assignments on the designated form when students are absent.", "Collects any handouts and places them with the form in the Absentee Folder.", "Helps absent students understand what they missed when they return."]
 },
 {
     "title": "Brain Break Chooser",    
@@ -35,6 +35,30 @@
     "duties": ["Check that students have wiped their table clean of crumbs and other messes.", "Check for trash and other messes under tables and chairs.", "Let the teacher know when each table is cleaned up and ready to be dismissed."]
 },
 {
+    "title": "Special Assistant to the Substitute",    
+    "duties": ["When the teacher is absent, answer any questions that the substitute has.", "Help the substitute with anything that they ask you to do."]
+},
+{
+    "title": "Cell Phone Security",    
+    "duties": ["Ensure that all students place their phones on 'silent' mode and check them into the cell phone area before class begins.", "Monitor the cell phone area to ensure that students are not taking phones out during class.", "Remind students to collect their phones as they leave class."]
+},
+{
+    "title": "Lighting Director",    
+    "duties": ["Turn out all lights whenever the class leaves the classroom and turn them on again when the class returns.", "Adjust lights and window blinds as needed when the class is watching a video or viewing the projector screen."]
+},
+{
+    "title": "Desk Inspector",    
+    "duties": ["Make sure that all students clear their desks when the teacher tells them to do so for an activity.", "Make sure that the tops of students' desks are neat when the class leaves the room."]
+},
+{
+    "title": "",    
+    "duties": [""]
+},
+{
+    "title": "",    
+    "duties": [""]
+},
+{
     "title": "",    
     "duties": [""]
 },
@@ -49,4 +73,20 @@
 {
     "title": "",    
     "duties": [""]
-},]  
+},
+{
+    "title": "",    
+    "duties": [""]
+},
+{
+    "title": "",    
+    "duties": [""]
+},
+{
+    "title": "",    
+    "duties": [""]
+},
+{
+    "title": "",    
+    "duties": [""]
+}]  
