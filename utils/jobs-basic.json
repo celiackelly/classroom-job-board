@@ -56,15 +56,15 @@
 },
 {
     "title": "Meteorologist",    
-    "duties": [""]
+    "duties": ["Observe the daily weather.", "Update the weather on the classroom weather chart."]
 },
 {
-    "title": "",    
-    "duties": [""]
+    "title": "Whiteboard Wiper",    
+    "duties": ["Wipe down the white boards at the end of the day.", "Return the cleaning supplies to their place when you are done. ", "Let the teacher know when the cleaning solution is running low."]
 },
 {
-    "title": "",    
-    "duties": [""]
+    "title": "Zoologist",    
+    "duties": ["Take care of the classroom pet.", "Feed and water them daily.", "Make sure their container is clean."]
 },
 {
     "title": "",    
