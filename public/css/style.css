@@ -25,7 +25,7 @@ h1 + p {
 }
 
 .heading-with-btn-right {
-    display: inline;
+    display: inline-block;
     vertical-align: middle;
     padding-right: .5rem;
 }
