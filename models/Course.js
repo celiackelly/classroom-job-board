@@ -15,7 +15,7 @@ const courseSchema = new mongoose.Schema({
         default: false,
         required: true,
     },
-    //add jobList? 
+    jobList: [{ type : mongoose.Schema.Types.ObjectId, ref: 'Job' }],
 }, { timestamps: true })
 
 module.exports = mongoose.model('Course', courseSchema)
