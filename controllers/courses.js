@@ -58,12 +58,11 @@ module.exports = {
     editJobList: async (req, res) => {
         try {
             const jobListInput = req.body.jobList
-            console.log(req.body.jobList)
             //How can I pass the job IDs through instead, while still displaying just the titles in the datalist input? 
+            
             const jobList = await Job.find({ title: { $in: jobListInput } })
-            console.log(jobList) 
             const jobIds = jobList.map(job => job._id)
-            console.log(jobIds)
+
             await Course.findByIdAndUpdate(req.params.id, {
                 jobList: jobIds
                 //do you need to use push here, like with adding students? probably...
@@ -75,13 +74,11 @@ module.exports = {
             //By default, Express uses HTTP 302 for redirect, but this prevents PUT/POST requests from being redirected, 
             //so you have to set the code to 303
             //https://expressjs.com/en/api.html#res.redirect - also note the leading vs. trailing slashes
-
-            //I really want to just re-render the current page...
-            res.redirect(303, `/users/dashboard`)
+            res.redirect(303, `/users/courses/${req.params.id}`)
         } catch(err) {
             console.log(err)
             req.flash('errors', { msg: 'Unable to update class job list.' })
-            res.redirect(303, '/users/dashboard')
+            res.redirect(303,  `/users/courses/${req.params.id}`)
         }
     },
 
