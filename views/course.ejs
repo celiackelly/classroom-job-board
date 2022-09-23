@@ -30,21 +30,25 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form id="editJobListForm">
-                <label for="allJobsDataList" class="form-label">All Jobs</label>
-                <input required class="form-control" list="datalistOptions" id="allJobsDataList" placeholder="Type to search jobs...">
-                <datalist id="datalistOptions">
-                    <% allJobs.forEach(job => { %>
-                        <option value="<%= job.title %>">
-                        <% })
-                    %>
-                </datalist>
+            <form id="editJobListForm" class="text-center">
+                <div id="allJobsDataListInputDiv-1" class="my-2">
+                    <!--Add number label?-->
+                    <input required name="jobList" class="form-control job-list-input" list="datalistOptions" placeholder="Type to search jobs..." aria-label="Select a job from the list">
+                    <datalist id="datalistOptions">
+                        <% allJobs.forEach(job => { %>
+                            <option value="<%= job.title %>">
+                            <% })
+                        %>
+                    </datalist>
+                </div>
+                <button type="button" class="fa-sharp fa-solid fa-circle-plus btn btn-outline-primary mt-2" id="add-job-input-btn" aria-label="Add another job"></button>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             <button type="submit" form="editJobListForm" class="btn btn-primary">Submit</button>
         </div>
         </div>
     </div>
 </div>
+
+<script type="module" src="/js/coursePageFunctions.js"></script>
