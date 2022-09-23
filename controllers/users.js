@@ -20,10 +20,8 @@ module.exports = {
     }, 
     getCourse: async (req, res) => {
         try {
-            const course = await Course.findById(req.params.courseId).lean()
-            //refactor with .populate?
+            const course = await Course.findById(req.params.courseId).populate('jobList').lean()
             const students = await Student.find({ enrolledInCourse: req.params.courseId }).lean()
-            
             // this is all the job choices from the db, to display in the edit modal to choose the jobList for the course
             const allJobs = await Job.find({}).exec()
             res.render('course', {title: 'Course', course, students, allJobs})
