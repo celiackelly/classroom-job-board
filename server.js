@@ -9,6 +9,7 @@ const mongoose = require('mongoose')
 const passport = require('passport')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
+const methodOverride = require("method-override")
 const expressLayouts = require('express-ejs-layouts')
 const flash = require('express-flash')
 const logger = require('morgan')
@@ -31,7 +32,12 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(expressLayouts)
+
+//Use forms for put / delete
+app.use(methodOverride("_method"));
+
 app.use(logger('dev'))
+
 // Sessions
 app.use(
     session({

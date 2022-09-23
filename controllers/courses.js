@@ -1,5 +1,6 @@
 const Course = require('../models/Course')
 const Student = require('../models/Student')
+const Job = require('../models/Job')
 const googleApi = require("../utils/google-api")
 
 module.exports = {
@@ -54,10 +55,15 @@ module.exports = {
             res.redirect(303, `/users/dashboard`)
         }
     },
-    editJobList: async (request, response) => {
+    editJobList: async (req, res) => {
         try {
-            await Course.findByIdAndUpdate(request.params.id, {
-                //put updates from form here
+            const jobListInput = req.body.jobList
+            console.log(req.body.jobList)
+            //How can I pass the job IDs through instead, while still displaying just the titles in the datalist input? 
+            //This does not work yet
+            const jobList = await jobListInput.map(job => Job.findOne({title: job.title})._id)
+            await Course.findByIdAndUpdate(req.params.id, {
+                jobList: jobList
             }, {
                 upsert: false, 
                 runValidators: true
@@ -66,24 +72,15 @@ module.exports = {
             //By default, Express uses HTTP 302 for redirect, but this prevents PUT/POST requests from being redirected, 
             //so you have to set the code to 303
             //https://expressjs.com/en/api.html#res.redirect - also note the leading vs. trailing slashes
-            response.redirect(303, '/users/dashboard')
+
+            //I really want to just re-render the current page...
+            res.redirect(303, `/users/dashboard`)
         } catch(err) {
             console.log(err)
-            response.redirect(303, '/users/dashboard')
+            req.flash('errors', { msg: 'Unable to update class job list.' })
+            res.redirect(303, '/users/dashboard')
         }
     },
 
-
-        // deleteDish: async (request, response) => {
-    //     try {
-    //         //Find the Dish where _id matches request.params.id and delete it
-    //         await Dish.findByIdAndDelete(request.params.id)
-    //         console.log('Dish Deleted')
-    //         response.redirect(303, `/users/${request.user._id}/dashboard`)
-    //     } catch(err) {
-    //         console.log(err)
-    //         response.redirect(303, `/users/${request.user._id}/dashboard`)
-    //     }
-    // }, 
 }
 

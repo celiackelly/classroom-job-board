@@ -30,10 +30,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form id="editJobListForm" class="text-center">
+            <form action="/courses/<%= course._id %>/jobList/edit?_method=PUT" method="POST" id="editJobListForm" class="text-center">
+                <!--Add delete button for each input! (DOM only)-->
                 <% if (course.jobList.length) { %>
                     <% course.jobList.forEach((job, i) => { %>
-                        <div id="allJobsDataListInputDiv-<%=i - 1%>" class="my-2">
+                        <div id="allJobsDataListInputDiv-<%=i%>" class="my-2">
                             <!--Add number label?-->
                             <input required name="jobList" class="form-control job-list-input" list="datalistOptions" value="<%=job.title%>" aria-label="Select a job from the list">
                             <datalist id="datalistOptions">
@@ -46,7 +47,7 @@
                         <% })
                     %>
                 <%} else { %> 
-                    <div id="allJobsDataListInputDiv-1" class="my-2">
+                    <div id="allJobsDataListInputDiv-0" class="my-2">
                         <!--Add number label?-->
                         <input required name="jobList" class="form-control job-list-input" list="datalistOptions" placeholder="Type to search jobs..." aria-label="Select a job from the list">
                         <datalist id="datalistOptions">
