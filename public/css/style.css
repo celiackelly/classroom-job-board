@@ -30,9 +30,10 @@ h1 + p {
     padding-right: .5rem;
 }
 
-.count {
+.count-badge {
     font-family: 'Saira Condensed', sans-serif;
-    color: #1371DE;
+    background-color: #F4D836;
+    color: #000;
 }
 
 /* Buttons */

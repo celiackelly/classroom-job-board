@@ -1,11 +1,13 @@
+<!--Course Page-->
 <div class="container-fluid p-5 row">
     <h1>Class: <%= course.name %></h1>
-    <section class="col-md-6">
+    <!--Roster Section-->
+    <section class="col-md-6 m-3">
         <div>
             <h2 class="heading-with-btn-right">Roster</h2>
             <button type="button" class="btn btn-primary fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#addStudentsModal" aria-label="Add students"></button>
         </div>
-        <span class="count"><%= students.length %> students</span>
+        <span class="badge count-badge mb-1"><%= students.length %> students</span>
         <% if (students.length) { %>
             <ul>
                 <% students.forEach(student => { %>
@@ -18,12 +20,13 @@
             <%}
         %> 
     </section>
-    <section class="col-md-6">
+    <!--Job List Section-->
+    <section class="col-md-6 m-3">
         <div>
             <h3 class="h2 heading-with-btn-right">Job List</h3>
             <button type="button" class="btn btn-primary fa-solid fa-pencil" data-bs-toggle="modal" data-bs-target="#editJobListModal" aria-label="Edit the Job List"></button>
         </div>  
-        <span class="count"><%= course.jobList.length %> class jobs</span>
+        <span class="badge count-badge mb-1"><%= course.jobList.length %> class jobs</span>
         <%  if (course.jobList.length) { %>
                 <ul>
                     <%  course.jobList.forEach(job => { %>
