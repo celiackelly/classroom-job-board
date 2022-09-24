@@ -3,12 +3,78 @@
     <div class="row">
         <h1>Class: <%= course.name %></h1>
     </div>
-    <div class="row">
+    <div class="row justify-content-between">
         <!-- Current Job Assignments-->
-        <section class="col-md-9 order-md-2">
-            <h2 class="m-3 py-2 heading-with-btn-right">Current Job Board</h2>
+        <section class="col-md-7 col-lg-8 order-md-2 ms-3">
+            <h2 class="heading-with-btn-right py-2">Current Job Board</h2>
             <button type="button" class="btn btn-primary">Assign New Jobs</button>
+                        <!-- <div class="container-fluid ms-3">
+                <div class="row">
+                    <ul class="list-group col-4">
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item">A fourth item</li>
+                        <li class="list-group-item">And a fifth one</li>
+                    </ul>
+                    <ul class="list-group col-4">
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item">A fourth item</li>
+                        <li class="list-group-item">And a fifth one</li>
+                    </ul>
+                </div>
+            </div> -->
+            <!-- <div class="pb-5">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Job</th>
+                        <th scope="col">Student</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Paper Passer</td>
+                        <td draggable="true">Alexis Conlin</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Line Leader</td>
+                        <td draggable="true">Joel Chen</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Line Leader</td>
+                        <td draggable="true">Joel Chen</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div> -->
 
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Job</th>
+                    <th scope="col">Student</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%  if (course.jobList.length) { %> 
+                            <% course.jobList.forEach (job => { %> 
+                                    <tr>
+                                        <!--probably need to add a data-id here...-->
+                                        <th scope="row"><%= job.title%></td>
+                                    </tr>
+                                <% })
+                            %>
+                        <%} 
+                    %> 
+                </tbody>
+                </table>
+            <%  if (!course.jobList.length) { %>
+                    <p>Add some jobs to your job list to get started...</p>
+                <%} 
+            %> 
         </section>
 
         <div class="col-md-3 order-md-1">
@@ -46,9 +112,7 @@
                                 <% })
                             %>
                         </ul>
-                    <%} else { %>
-                            <p>Add some jobs to get started...</p>
-                    <%}
+                    <%} 
                 %> 
             </section>
         </div>
