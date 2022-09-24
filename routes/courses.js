@@ -8,8 +8,10 @@ const { ensureAuth } = require('../middleware/auth')
 //Handle on the same route, or not? 
 router.post('/', ensureAuth, coursesController.createCourse)
 
-router.put('/:id/jobList/edit', ensureAuth, coursesController.editJobList)
-
 router.post('/google', ensureAuth, coursesController.importCourses)
+
+router.post('/:id/students', ensureAuth, coursesController.addStudents)
+
+router.put('/:id/jobList', ensureAuth, coursesController.editJobList)
 
 module.exports = router

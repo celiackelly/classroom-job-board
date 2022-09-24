@@ -1,7 +1,11 @@
 <div class="container-fluid p-5 row">
     <h1>Class: <%= course.name %></h1>
     <section class="col-md-6">
-        <h2>Roster <span class="text-muted h6"><%= students.length %> students</span></h2>
+        <div>
+            <h2 class="heading-with-btn-right">Roster</h2>
+            <button type="button" class="btn btn-primary fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#addStudentsModal" aria-label="Add students"></button>
+        </div>
+        <span class="count"><%= students.length %> students</span>
         <% if (students.length) { %>
             <ul>
                 <% students.forEach(student => { %>
@@ -15,8 +19,11 @@
         %> 
     </section>
     <section class="col-md-6">
-        <h3 class="h2 heading-with-btn-right">Job List</h3>
-        <button type="button" class="btn btn-primary fa-solid fa-pencil" data-bs-toggle="modal" data-bs-target="#editJobListModal" aria-label="Edit the Job List"></button>
+        <div>
+            <h3 class="h2 heading-with-btn-right">Job List</h3>
+            <button type="button" class="btn btn-primary fa-solid fa-pencil" data-bs-toggle="modal" data-bs-target="#editJobListModal" aria-label="Edit the Job List"></button>
+        </div>  
+        <span class="count"><%= course.jobList.length %> class jobs</span>
         <%  if (course.jobList.length) { %>
                 <ul>
                     <%  course.jobList.forEach(job => { %>
@@ -31,6 +38,38 @@
     </section>
 </div>
 
+<!-- Modal- Add Students -->
+<div class="modal fade" id="addStudentsModal" tabindex="-1" aria-labelledby="addStudentsModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addStudentsModalTitle">Add Students</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="/courses/<%= course._id %>/students" method="POST" id="addStudentsForm">
+                <fieldset>
+                    <div class="text-center" id="student-inputs-container">
+                        <div class="row g-3 py-2 align-items-center justify-content-center student-name-inputs" id="student-1">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" name="studentFName[]" placeholder="First Name" ariaLabel="first name">
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" name="studentLName[]" placeholder="Last Name" ariaLabel="last name">
+                            </div>
+                        </div>
+                        <button type="button" class="fa-sharp fa-solid fa-circle-plus btn btn-outline-primary" id="add-student-row-btn" aria-label="Add another student"></button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" form="addStudentsForm" class="btn btn-primary">Submit</button>
+        </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal- Edit Job List -->
 <div class="modal fade" id="editJobListModal" tabindex="-1" aria-labelledby="editJobListModalTitle" aria-hidden="true">
@@ -41,7 +80,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="/courses/<%= course._id %>/jobList/edit?_method=PUT" method="POST" id="editJobListForm" class="text-center">
+            <form action="/courses/<%= course._id %>/jobList?_method=PUT" method="POST" id="editJobListForm" class="text-center">
                 <!--Add delete button for each input! (DOM only)-->
                 <% if (course.jobList.length) { %>
                     <% course.jobList.forEach((job, i) => { %>

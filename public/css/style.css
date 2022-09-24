@@ -30,6 +30,10 @@ h1 + p {
     padding-right: .5rem;
 }
 
+.count {
+    font-family: 'Saira Condensed', sans-serif;
+    color: #1371DE;
+}
 
 /* Buttons */
 

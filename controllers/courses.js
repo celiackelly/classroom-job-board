@@ -29,7 +29,6 @@ module.exports = {
             } } })
 
             console.log('Course Added') 
-            console.log(course)
             res.redirect(303, `/users/dashboard`)
         } catch(err) {
             console.log(err)
@@ -81,6 +80,33 @@ module.exports = {
             res.redirect(303,  `/users/courses/${req.params.id}`)
         }
     },
+    addStudents: async (req, res) => {
+        try {
+            const studentFNames = req.body.studentFName
+            const studentLNames = req.body.studentLName
+            const studentList = studentFNames.map((fName, i) => {
+                let student = {
+                    firstName: fName, 
+                    lastName: studentLNames[i], 
+                    enrolledInCourse: req.params.id
+                }
+                return student
+            })
+            const students = await Student.create(studentList)
+            console.log(students)
+            const studentIds = students.map(student => student._id)
 
+            await Course.updateOne({_id: req.params.id}, { $push: { students: {
+                $each: studentIds
+            } } })
+
+            console.log('Students Added to Course') 
+            res.redirect(303, `/users/courses/${req.params.id}`)
+        } catch(err) {
+            console.log(err)
+            req.flash('errors', { msg: 'Unable to add students to course.' })
+            res.redirect(303, `/users/courses/${req.params.id}`)
+        }
+    },
 }
 
