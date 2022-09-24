@@ -58,8 +58,7 @@ module.exports = {
         try {
             const jobListInput = req.body.jobList
             //How can I pass the job IDs through instead, while still displaying just the titles in the datalist input? 
-            
-            const jobList = await Job.find({ title: { $in: jobListInput } })
+            const jobList = await Job.find({ title: { $in: jobListInput } }).sort('title')
             const jobIds = jobList.map(job => job._id)
 
             await Course.findByIdAndUpdate(req.params.id, {

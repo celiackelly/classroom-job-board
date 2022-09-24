@@ -6,7 +6,7 @@ const Job = require('../models/Job')
 module.exports = {
     getDashboard: async (req, res) => {
         try {
-            const courses = await Course.find({userId: req.user.id}).exec()
+            const courses = await Course.find({userId: req.user.id}).sort('name').exec()
             courses.forEach(course => {
                 course.studentCount = course.students.length
                 console.log(course.studentCount)
@@ -21,9 +21,9 @@ module.exports = {
     getCourse: async (req, res) => {
         try {
             const course = await Course.findById(req.params.courseId).populate('jobList').lean()
-            const students = await Student.find({ enrolledInCourse: req.params.courseId }).lean()
+            const students = await Student.find({ enrolledInCourse: req.params.courseId }).sort('lastName').lean()
             // this is all the job choices from the db, to display in the edit modal to choose the jobList for the course
-            const allJobs = await Job.find({}).exec()
+            const allJobs = await Job.find({}).sort('title').exec()
             res.render('course', {title: 'Course', course, students, allJobs})
         } catch (err) {
             console.log(err)
