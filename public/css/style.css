@@ -34,6 +34,7 @@ h1 + p {
     font-family: 'Saira Condensed', sans-serif;
     background-color: #F4D836;
     color: #000;
+    max-width: fit-content;
 }
 
 /* Buttons */

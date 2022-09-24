@@ -1,44 +1,55 @@
 <!--Course Page-->
-<div class="container-fluid p-5 row">
-    <h1>Class: <%= course.name %></h1>
-    <!--Roster Section-->
-    <section class="col-md-6 m-3">
-        <div>
-            <h2 class="heading-with-btn-right">Roster</h2>
-            <button type="button" class="btn btn-primary fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#addStudentsModal" aria-label="Add students"></button>
+<div class="container-fluid p-5">
+    <div class="row">
+        <h1>Class: <%= course.name %></h1>
+    </div>
+    <div class="row">
+        <!-- Current Job Assignments-->
+        <section class="col-md-9 order-md-2">
+            <h2 class="m-3 py-2">Current Job Assignments</h2>
+        </section>
+        <div class="col-md-3 order-md-1">
+        <!--Roster Section-->
+            <section class="m-3 py-2">
+                <div>
+                    <h3 class=" h2 heading-with-btn-right">Roster</h3>
+                    <button type="button" class="btn btn-primary fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#addStudentsModal" aria-label="Add students"></button>
+                </div>
+                <span class="badge count-badge mb-1"><%= students.length %> students</span>
+                <% if (students.length) { %>
+                    <ul>
+                        <% students.forEach(student => { %>
+                            <li><%= student.firstName %> <%= student.lastName %></li>
+                            <% })
+                        %>
+                    </ul>
+                    <%} else { %> 
+                        <p> Add some students to get started.</p>
+                    <%}
+                %> 
+            </section>
+
+            <!--Job List Section-->
+            <section class="m-3 py-2">
+                <div>
+                    <h3 class="h2 heading-with-btn-right">Job List</h3>
+                    <button type="button" class="btn btn-primary fa-solid fa-pencil" data-bs-toggle="modal" data-bs-target="#editJobListModal" aria-label="Edit the Job List"></button>
+                </div>  
+                <span class="badge count-badge mb-1"><%= course.jobList.length %> class jobs</span>
+                <%  if (course.jobList.length) { %>
+                        <ul>
+                            <%  course.jobList.forEach(job => { %>
+                                    <li><%= job.title %></li>
+                                <% })
+                            %>
+                        </ul>
+                    <%} else { %>
+                            <p>Add some jobs to get started...</p>
+                    <%}
+                %> 
+            </section>
         </div>
-        <span class="badge count-badge mb-1"><%= students.length %> students</span>
-        <% if (students.length) { %>
-            <ul>
-                <% students.forEach(student => { %>
-                    <li><%= student.firstName %> <%= student.lastName %></li>
-                    <% })
-                %>
-            </ul>
-            <%} else { %> 
-                <p> Add some students to get started.</p>
-            <%}
-        %> 
-    </section>
-    <!--Job List Section-->
-    <section class="col-md-6 m-3">
-        <div>
-            <h3 class="h2 heading-with-btn-right">Job List</h3>
-            <button type="button" class="btn btn-primary fa-solid fa-pencil" data-bs-toggle="modal" data-bs-target="#editJobListModal" aria-label="Edit the Job List"></button>
-        </div>  
-        <span class="badge count-badge mb-1"><%= course.jobList.length %> class jobs</span>
-        <%  if (course.jobList.length) { %>
-                <ul>
-                    <%  course.jobList.forEach(job => { %>
-                            <li><%= job.title %></li>
-                        <% })
-                    %>
-                </ul>
-            <%} else { %>
-                    <p>Add some jobs to get started...</p>
-            <%}
-        %> 
-    </section>
+    </div>
 </div>
 
 <!-- Modal- Add Students -->
