@@ -63,15 +63,15 @@
                             <% course.currentJobAssignments.forEach (assignment => { %> 
                                     <tr>
                                         <!--probably need to add a data-id here...-->
-                                        <th scope="row"><%= assignment.job%></th>
+                                        <th scope="row"><%= assignment.job.title%></th>
                                         <!--does the student's name need to be in a span?-->
-                                        <td><%= assignment.student%></td>    
+                                        <td><%= assignment.student.firstName%> <%= assignment.student.lastName%></td>    
                                     </tr>
                                 <% })
                             %>
                         <%} 
                     %> 
-                    <% course.jobList.filter(job => !course.currentJobAssignments.includes(job)).forEach (job => { %> 
+                    <% unassignedJobs.forEach (job => { %> 
                             <tr>
                                 <!--probably need to add a data-id here...-->
                                 <th scope="row"><%= job.title %></th>
@@ -85,7 +85,7 @@
             </table>
             <div class="unassigned-students-container">
                 <h3>Unassigned Students</h3>
-                <% students.filter(student => !course.currentJobAssignments.includes(student)).forEach(student => { %>
+                <% unassignedStudents.forEach(student => { %>
                     <span class="rounded"><%= student.firstName %> <%= student.lastName %></span>
                     <% }) %>
             </div> 
