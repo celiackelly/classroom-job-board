@@ -63,7 +63,6 @@ module.exports = {
 
             await Course.findByIdAndUpdate(req.params.id, {
                 jobList: jobIds
-                //do you need to use push here, like with adding students? probably...
             }, {
                 upsert: false, 
                 runValidators: true
@@ -105,6 +104,23 @@ module.exports = {
             console.log(err)
             req.flash('errors', { msg: 'Unable to add students to course.' })
             res.redirect(303, `/users/courses/${req.params.id}`)
+        }
+    },
+    assignJobs: async (req, res) => {
+        try {
+            //find course by id that matches req.params.id
+            //update currentJobAssignments for the course
+            
+            //update student job histories
+                //if they have a current job, update endedOn with current datetime
+                //if they have a new job, add it, with startedOn datetime
+
+            console.log(`Course Updated: assignJobs`)
+            res.redirect(303, `/users/courses/${req.params.id}`)
+        } catch(err) {
+            console.log(err)
+            req.flash('errors', { msg: 'Unable to assign jobs.' })
+            res.redirect(303,  `/users/courses/${req.params.id}`)
         }
     },
 }

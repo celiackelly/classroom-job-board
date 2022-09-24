@@ -13,15 +13,14 @@ const studentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: 'Course', 
         required: true,
     },
-    //do I need this?
-    currentJob: { 
-        type: mongoose.Schema.Types.ObjectId, ref: 'Job', 
-    },
+    //do I need this? Right now, I'm determining current job in usersController.getCourse, before displaying the page
+    // currentJob: { 
+    //     type: mongoose.Schema.Types.ObjectId, ref: 'Job', 
+    // },
     //not quite sure how to model jobHistory yet...
+    //could also add an isCurrent property to the jobHeld instead?
     jobHistory: [{
-        jobHeld: { 
-            type: mongoose.Schema.Types.ObjectId, ref: 'Job', 
-            required: true }, 
+        title: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', required: true }, 
         startedOn: Date, 
         endedOn: Date
     }]

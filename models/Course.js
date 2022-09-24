@@ -21,6 +21,12 @@ const courseSchema = new mongoose.Schema({
         required: true, 
         default: [] 
     }],
+    currentJobAssignments: [{
+        job: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', required: true},
+        student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true},
+        required: true, 
+        default: [] 
+    }],
 }, { timestamps: true })
 
 module.exports = mongoose.model('Course', courseSchema)
