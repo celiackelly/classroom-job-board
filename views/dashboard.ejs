@@ -17,8 +17,9 @@
                     <li class="list-style-none py-1">
                         <div class="card">
                             <div class="card-body">
-                              <h5 class="card-title"><a href="/users/courses/<%= course.id %>"><%= course.name %></a></h5>
-                              <h6 class="card-subtitle mb-2 text-muted"><%= course.studentCount %> students</h6>
+                              <h3 class="card-title"><a href="/users/courses/<%= course.id %>"><%= course.name %></a></h3>
+                              <!-- <h6 class="card-subtitle mb-2 text-muted"><%= course.studentCount %> students</h6> -->
+                              <span class="badge count-badge"><%= course.studentCount %> students</span>
                               <% if (course.importedFromGoogle) { %>
                                 <a href="<%= course.alternateLink %>">View on Google Classroom</a>
                                 <% } 
