@@ -22,9 +22,8 @@ const courseSchema = new mongoose.Schema({
         default: [] 
     }],
     currentJobAssignments: [{
-        job: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', required: true},
-        student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true},
-        required: true, 
+        job: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', required: true },
+        student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true },
         default: [] 
     }],
 }, { timestamps: true })

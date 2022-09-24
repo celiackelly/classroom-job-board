@@ -78,22 +78,6 @@ h1 + p {
     font-size: 1.5rem;
 }
 
-/* .btn.fa-circle-plus {
-    color: #1371DE;
-    font-size: 2rem;
-    border-radius: 100;
-    border: none;
-}
-
-.btn.fa-circle-plus:hover {
-    color: #35ecb5;
-}
-
-.btn.fa-circle-plus:focus {
-    color: #35ecb5;
-    border: 1px solid #1371DE;
-    outline: #DDEDFF solid 3px;
-}  */
 
 /* List Styling */
 
@@ -140,7 +124,7 @@ footer i {
     font-size: 1.5rem;
 }
 
-/* Homepage Page */
+/* Homepage */
 
     /* Hero Section */
     .section-hero {
@@ -163,5 +147,12 @@ footer i {
         height: 100%;
     }
 
+/* Course Page */
 
+    /* Unassigned Students */
 
+    .unassigned-students-container span {
+        background-color: #FFF;
+        padding: 5px;
+        margin: 5px;
+    }

@@ -2,3 +2,22 @@
     <td><%= student.firstName %> <%= student.lastName %></td>
     <%}
 %>
+
+
+
+<%  if (course.currentJobAssignments.length) { %> 
+    <% course.currentJobAssignments.forEach (assignment => { %> 
+            <tr>
+                <!--probably need to add a data-id here...-->
+                <th scope="row"><%= assignment.job%></th>
+                <% if (assignment.student) { %>
+                        <td><%= assignment.student%></td>    
+                    <%} else { %> 
+                        <td></td>
+                    <% }
+                %>
+            </tr>
+        <% })
+    %>
+<%} 
+%> 

@@ -59,18 +59,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%  if (course.jobList.length) { %> 
-                            <% course.jobList.forEach (job => { %> 
+                    <%  if (course.currentJobAssignments.length) { %> 
+                            <% course.currentJobAssignments.forEach (assignment => { %> 
                                     <tr>
                                         <!--probably need to add a data-id here...-->
-                                        <th scope="row"><%= job.title%></td>
+                                        <th scope="row"><%= assignment.job%></th>
+                                        <!--does the student's name need to be in a span?-->
+                                        <td><%= assignment.student%></td>    
                                     </tr>
                                 <% })
                             %>
                         <%} 
                     %> 
+                    <% course.jobList.filter(job => !course.currentJobAssignments.includes(job)).forEach (job => { %> 
+                            <tr>
+                                <!--probably need to add a data-id here...-->
+                                <th scope="row"><%= job.title %></th>
+                                <!--empty table cell for student-->
+                                <td></td>
+                            </tr>
+                        <% })
+                    %>
+                    <!--how to display jobs w/o students and students w/o jobs?-->
                 </tbody>
-                </table>
+            </table>
+            <div class="unassigned-students-container">
+                <h3>Unassigned Students</h3>
+                <% students.filter(student => !course.currentJobAssignments.includes(student)).forEach(student => { %>
+                    <span class="rounded"><%= student.firstName %> <%= student.lastName %></span>
+                    <% }) %>
+            </div> 
             <%  if (!course.jobList.length) { %>
                     <p>Add some jobs to your job list to get started...</p>
                 <%} 
@@ -196,6 +214,39 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" form="editJobListForm" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal- Assign New Jobs -->
+<section class="modal fade" id="addStudentsModal" tabindex="-1" aria-labelledby="addStudentsModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStudentsModalTitle">Add Students</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/courses/<%= course._id %>/students" method="POST" id="addStudentsForm">
+                    <fieldset>
+                        <div class="text-center" id="student-inputs-container">
+                            <div class="row g-3 py-2 align-items-center justify-content-center student-name-inputs" id="student-1">
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" name="studentFName[]" placeholder="First Name" ariaLabel="first name">
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" name="studentLName[]" placeholder="Last Name" ariaLabel="last name">
+                                </div>
+                            </div>
+                            <button type="button" class="fa-sharp fa-solid fa-circle-plus btn btn-outline-primary" id="add-student-row-btn" aria-label="Add another student"></button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="addStudentsForm" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>

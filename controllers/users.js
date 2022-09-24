@@ -20,7 +20,7 @@ module.exports = {
     }, 
     getCourse: async (req, res) => {
         try {
-            const course = await Course.findById(req.params.courseId).populate('jobList').lean()
+            const course = await Course.findById(req.params.courseId).populate(['jobList', 'currentJobAssignments']).lean()
             const students = await Student.find({ enrolledInCourse: req.params.courseId }).sort('lastName').populate('jobHistory').lean()
 
             //If the student has a job that they've started but not ended, set student.currentJob equal to this job (not in the db, but just for passing to the view)
