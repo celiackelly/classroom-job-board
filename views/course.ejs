@@ -10,7 +10,7 @@
         </section>
 
         <div class="col-md-3 order-md-1">
-        <!--Roster Section-->
+            <!--Roster Section-->
             <section class="m-3 py-2">
                 <div>
                     <h3 class=" h2 heading-with-btn-right">Roster</h3>
@@ -54,54 +54,68 @@
 </div>
 
 <!-- Modal- Add Students -->
-<div class="modal fade" id="addStudentsModal" tabindex="-1" aria-labelledby="addStudentsModalTitle" aria-hidden="true">
+<section class="modal fade" id="addStudentsModal" tabindex="-1" aria-labelledby="addStudentsModalTitle" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="addStudentsModalTitle">Add Students</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="/courses/<%= course._id %>/students" method="POST" id="addStudentsForm">
-                <fieldset>
-                    <div class="text-center" id="student-inputs-container">
-                        <div class="row g-3 py-2 align-items-center justify-content-center student-name-inputs" id="student-1">
-                            <div class="col-auto">
-                                <input type="text" class="form-control" name="studentFName[]" placeholder="First Name" ariaLabel="first name">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStudentsModalTitle">Add Students</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/courses/<%= course._id %>/students" method="POST" id="addStudentsForm">
+                    <fieldset>
+                        <div class="text-center" id="student-inputs-container">
+                            <div class="row g-3 py-2 align-items-center justify-content-center student-name-inputs" id="student-1">
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" name="studentFName[]" placeholder="First Name" ariaLabel="first name">
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" name="studentLName[]" placeholder="Last Name" ariaLabel="last name">
+                                </div>
                             </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" name="studentLName[]" placeholder="Last Name" ariaLabel="last name">
-                            </div>
+                            <button type="button" class="fa-sharp fa-solid fa-circle-plus btn btn-outline-primary" id="add-student-row-btn" aria-label="Add another student"></button>
                         </div>
-                        <button type="button" class="fa-sharp fa-solid fa-circle-plus btn btn-outline-primary" id="add-student-row-btn" aria-label="Add another student"></button>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" form="addStudentsForm" class="btn btn-primary">Submit</button>
-        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="addStudentsForm" class="btn btn-primary">Submit</button>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 <!-- Modal- Edit Job List -->
-<div class="modal fade" id="editJobListModal" tabindex="-1" aria-labelledby="editJobListModalTitle" aria-hidden="true">
+<section class="modal fade" id="editJobListModal" tabindex="-1" aria-labelledby="editJobListModalTitle" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="editJobListModalTitle">Edit Job List for <%=course.name %></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="/courses/<%= course._id %>/jobList?_method=PUT" method="POST" id="editJobListForm" class="text-center">
-                <!--Add delete button for each input! (DOM only)-->
-                <% if (course.jobList.length) { %>
-                    <% course.jobList.forEach((job, i) => { %>
-                        <div id="allJobsDataListInputDiv-<%=i%>" class="my-2">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editJobListModalTitle">Edit Job List for <%=course.name %></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/courses/<%= course._id %>/jobList?_method=PUT" method="POST" id="editJobListForm" class="text-center">
+                    <!--Add delete button for each input! (DOM only)-->
+                    <% if (course.jobList.length) { %>
+                        <% course.jobList.forEach((job, i) => { %>
+                            <div id="allJobsDataListInputDiv-<%=i%>" class="my-2">
+                                <!--Add number label?-->
+                                <input required name="jobList" class="form-control job-list-input" list="datalistOptions" value="<%=job.title%>" aria-label="Select a job from the list">
+                                <datalist id="datalistOptions">
+                                    <% allJobs.forEach(job => { %>
+                                        <option value="<%= job.title %>">
+                                        <% })
+                                    %>
+                                </datalist>
+                            </div>
+                            <% })
+                        %>
+                    <%} else { %>
+                        <h6 class="h5">Add some jobs to get started...</h6> 
+                        <div id="allJobsDataListInputDiv-0" class="my-2">
                             <!--Add number label?-->
-                            <input required name="jobList" class="form-control job-list-input" list="datalistOptions" value="<%=job.title%>" aria-label="Select a job from the list">
+                            <input required name="jobList" class="form-control job-list-input" list="datalistOptions" placeholder="Type to search jobs..." aria-label="Select a job from the list">
                             <datalist id="datalistOptions">
                                 <% allJobs.forEach(job => { %>
                                     <option value="<%= job.title %>">
@@ -109,30 +123,16 @@
                                 %>
                             </datalist>
                         </div>
-                        <% })
-                    %>
-                <%} else { %>
-                    <h6 class="h5">Add some jobs to get started...</h6> 
-                    <div id="allJobsDataListInputDiv-0" class="my-2">
-                        <!--Add number label?-->
-                        <input required name="jobList" class="form-control job-list-input" list="datalistOptions" placeholder="Type to search jobs..." aria-label="Select a job from the list">
-                        <datalist id="datalistOptions">
-                            <% allJobs.forEach(job => { %>
-                                <option value="<%= job.title %>">
-                                <% })
-                            %>
-                        </datalist>
-                    </div>
-                <%}
-                %> 
-                <button type="button" class="fa-sharp fa-solid fa-circle-plus btn btn-outline-primary mt-2" id="add-job-input-btn" aria-label="Add another job"></button>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="submit" form="editJobListForm" class="btn btn-primary">Submit</button>
-        </div>
+                    <%}
+                    %> 
+                    <button type="button" class="fa-sharp fa-solid fa-circle-plus btn btn-outline-primary mt-2" id="add-job-input-btn" aria-label="Add another job"></button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" form="editJobListForm" class="btn btn-primary">Submit</button>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 <script type="module" src="/js/coursePageFunctions.js"></script>

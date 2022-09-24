@@ -1,8 +1,8 @@
-<section class="container-fluid p-5">
-    <div class="col-12 col-lg-8 mx-auto pb-5">
+<div class="container-fluid p-5">
+    <section class="col-12 col-lg-8 mx-auto pb-5">
         <h1>Welcome, <%= user.firstName %> </h1>
-    </div>
-    <div class="col-12 col-lg-8 mx-auto">
+    </section>
+    <section class="col-12 col-lg-8 mx-auto">
         <div class="d-flex justify-content-between pb-2">
             <h2>Your Classes</h2>
             <!-- Add a Class Button triggers modal -->
@@ -34,47 +34,47 @@
                 <p> Add a class to get started.</p>
             <%}
         %> 
-    </div>
-</section>
+    </section>
+</div>
 
 <!-- Modal- Add a Class -->
-<div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalTitle" aria-hidden="true">
+<section class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalTitle" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="addClassModalTitle">Add a Class</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="/courses" method="POST" id="addClassForm">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addClassModalTitle">Add a Class</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/courses" method="POST" id="addClassForm">
 
-                <fieldset class="pb-4">
-                    <legend id="classNameLegend">Class Name</legend>
-                        <input type="text" class="form-control" name="className" required placeholder="3rd Grade Math" aria-labelledby="classNameLegend">
-                </fieldset>
-                <fieldset>
-                    <legend>Students</legend>
-                    <div class="text-center" id="student-inputs-container">
-                        <div class="row g-3 py-2 align-items-center justify-content-center student-name-inputs" id="student-1">
-                            <div class="col-auto">
-                                <input type="text" class="form-control" name="studentFName[]" placeholder="First Name" ariaLabel="first name">
+                    <fieldset class="pb-4">
+                        <legend id="classNameLegend">Class Name</legend>
+                            <input type="text" class="form-control" name="className" required placeholder="3rd Grade Math" aria-labelledby="classNameLegend">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Students</legend>
+                        <div class="text-center" id="student-inputs-container">
+                            <div class="row g-3 py-2 align-items-center justify-content-center student-name-inputs" id="student-1">
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" name="studentFName[]" placeholder="First Name" ariaLabel="first name">
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" name="studentLName[]" placeholder="Last Name" ariaLabel="last name">
+                                </div>
                             </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" name="studentLName[]" placeholder="Last Name" ariaLabel="last name">
-                            </div>
+                            <button type="button" class="fa-sharp fa-solid fa-circle-plus btn btn-outline-primary" id="add-student-row-btn" aria-label="Add another student"></button>
                         </div>
-                        <button type="button" class="fa-sharp fa-solid fa-circle-plus btn btn-outline-primary" id="add-student-row-btn" aria-label="Add another student"></button>
-                    </div>
 
-                </fieldset>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" form="addClassForm" class="btn btn-primary">Submit</button>
-        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="addClassForm" class="btn btn-primary">Submit</button>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 <script type="module" src="/js/dashboardFunctions.js"></script>
