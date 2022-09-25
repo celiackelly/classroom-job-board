@@ -7,9 +7,16 @@
         <!-- Current Job Assignments-->
         <section class="col-md-7 col-lg-8 order-md-2 ms-3 mt-3">
             <h2 class="heading-with-btn-right py-2">Current Job Board</h2>
-            <button type="button" id="assign-new-jobs-btn" class="btn btn-primary">Assign New Jobs</button>
+            <%  if (students.length && course.jobList.length) {%> 
+                    <button type="button" id="assign-new-jobs-btn" class="btn btn-primary">Assign New Jobs</button>
+                <%}
+                else {%>
+                    <button type="button" disabled id="assign-new-jobs-btn" class="btn btn-primary">Assign New Jobs</button>    
+                <%}
+            %>
             <button type="button" id="randomize-btn" class="btn btn-primary hidden">Randomize</button>
             <button type="button" id="save-btn" class="btn btn-primary hidden" data-bs-toggle="modal" data-bs-target="#saveJobAssignmentsModal">Save</button>
+            <button type="button" id="cancel-btn" class="btn btn-danger hidden">Cancel</button>
 
             <!-- <div class="pb-5">
                 <table class="table">

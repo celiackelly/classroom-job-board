@@ -2,10 +2,12 @@ const assignNewJobsBtn = document.querySelector('#assign-new-jobs-btn')
 const randomizeBtn = document.querySelector('#randomize-btn')
 const saveBtn = document.querySelector('#save-btn')
 const modalSaveBtn = document.querySelector('#modal-save-btn')
+const cancelBtn = document.querySelector('#cancel-btn')
 
 assignNewJobsBtn.addEventListener('click', () => {
     randomizeBtn.classList.remove('hidden')
     saveBtn.classList.remove('hidden')
+    cancelBtn.classList.remove('hidden')
     assignNewJobsBtn.classList.add('hidden')
 })
 
@@ -78,7 +80,6 @@ randomizeBtn.addEventListener('click', () => {
 })
 
 modalSaveBtn.addEventListener('click', async () => {
-    
     try {
         const courseId = window.location.href.split('/')[5]
         console.log(courseId)
@@ -103,10 +104,14 @@ modalSaveBtn.addEventListener('click', async () => {
     }
 })
 
+cancelBtn.addEventListener('click', () => {
+    window.location.reload()
+})
 
+
+//In the 'Add Students' modal, add another row of student name inputs when the plus icon is clicked
 const addStudentRowBtn = document.querySelector('#add-student-row-btn')
 addStudentRowBtn.addEventListener('click', addStudentRow)
-//In the 'Add Students' modal, add another row of student name inputs when the plus icon is clicked
 function addStudentRow() {
     //Make a copy of the #student-1 div
     const studentNameInputs = document.querySelector('#student-1')
@@ -126,9 +131,9 @@ function addStudentRow() {
 }
 
 
+//In the 'Edit Job List' modal, add another job datalist input when the plus icon is clicked
 const addJobInputBtn = document.querySelector('#add-job-input-btn')
 addJobInputBtn.addEventListener('click', addJobInput)
-//In the 'Edit Job List' modal, add another job datalist input when the plus icon is clicked
 function addJobInput() {
     //Make a copy of the #allJobsDataListInput
     const jobInputDiv = document.querySelector('#allJobsDataListInputDiv-0')
