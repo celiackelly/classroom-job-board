@@ -108,13 +108,57 @@ module.exports = {
     },
     assignJobs: async (req, res) => {
         try {
-            console.log(req.body)
-            //find course by id that matches req.params.id
-            //update currentJobAssignments for the course
-            
-            //update student job histories
-                //if they have a current job, update endedOn with current datetime
-                //if they have a new job, add it, with startedOn datetime
+
+            const newJobAssignments = req.body.assignments
+            await Course.findByIdAndUpdate(req.params.id, {
+                currentJobAssignments: newJobAssignments
+            }, {
+                upsert: false, 
+                runValidators: true
+            })
+
+            // should I change this behavior if "new" job is the same?
+            await Student.updateMany(
+                {
+                    enrolledInCourse: req.params.id
+                }, 
+                {
+                    $set: {
+                        "jobHistory.$[elemX].endedOn": new Date()
+                    } 
+                }, 
+                {
+                    arrayFilters: [
+                        {
+                            "elemX.endedOn": undefined
+                        }
+                    ],
+                    upsert: false, 
+                    runValidators: true
+                }
+            )
+
+            await Promise.all(
+                newJobAssignments.map(assignment => {
+                    Student.findOneAndUpdate(
+                        {
+                            _id: assignment.student
+                        },
+                        {
+                            $push: {
+                                jobHistory: {
+                                    title: assignment.job, 
+                                    startedOn: new Date(),    
+                                }
+                            }
+                        }, 
+                        {
+                            upsert: false, 
+                            runValidators: true
+                        }
+                    ).exec()
+                })
+            )
 
             console.log(`Course Updated: assignJobs`)
             res.redirect(303, `/users/courses/${req.params.id}`)

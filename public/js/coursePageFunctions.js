@@ -86,10 +86,10 @@ modalSaveBtn.addEventListener('click', async () => {
         const assignments = tableRows.map(row => {
             const jobId = row.querySelector('th').dataset.id
             const studentId = row.querySelector('span').dataset.id
-            return { 'jobId': jobId, 'studentId': studentId }
+            return { 'job': jobId, 'student': studentId }
         })
         console.log(assignments)
-        const response = await fetch(`/courses/${courseId}/currentJobAssignments`, {
+        await fetch(`/courses/${courseId}/currentJobAssignments`, {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
