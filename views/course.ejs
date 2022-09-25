@@ -7,7 +7,9 @@
         <!-- Current Job Assignments-->
         <section class="col-md-7 col-lg-8 order-md-2 ms-3 mt-3">
             <h2 class="heading-with-btn-right py-2">Current Job Board</h2>
-            <button type="button" class="btn btn-primary">Assign New Jobs</button>
+            <button type="button" id="assign-new-jobs-btn" class="btn btn-primary">Assign New Jobs</button>
+            <button type="button" id="randomize-btn" class="btn btn-primary hidden">Randomize</button>
+            <button type="button" id="save-btn" class="btn btn-primary hidden">Save</button>
 
             <!-- <div class="pb-5">
                 <table class="table">
@@ -77,14 +79,16 @@
             <!--Roster Section-->
             <section class="m-3 py-2">
                 <div>
-                    <h3 class=" h2 heading-with-btn-right">Roster</h3>
+                    <h3 class="h2 heading-with-btn-right">Roster</h3>
                     <button type="button" class="btn btn-primary fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#addStudentsModal" aria-label="Add students"></button>
                 </div>
                 <span class="badge count-badge mb-1"><%= students.length %> students</span>
                 <% if (students.length) { %>
                     <ul>
                         <% students.forEach(student => { %>
-                            <li><%= student.firstName %> <%= student.lastName %></li>
+                            <li data-listname="roster" data-id="<%= student._id%>" data-first-name="<%= student.firstName%>" data-last-name="<%= student.lastName%>">
+                                <%= student.firstName %> <%= student.lastName %>
+                            </li>
                             <% })
                         %>
                     </ul>
@@ -104,7 +108,9 @@
                 <%  if (course.jobList.length) { %>
                         <ul>
                             <%  course.jobList.forEach(job => { %>
-                                    <li><%= job.title %></li>
+                                    <li data-listname="joblist" data-id="<%= job._id%>" data-title="<%= job.title%>">
+                                        <%= job.title %>
+                                    </li>
                                 <% })
                             %>
                         </ul>
@@ -192,39 +198,6 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" form="editJobListForm" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Modal- Assign New Jobs -->
-<section class="modal fade" id="addStudentsModal" tabindex="-1" aria-labelledby="addStudentsModalTitle" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addStudentsModalTitle">Add Students</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="/courses/<%= course._id %>/students" method="POST" id="addStudentsForm">
-                    <fieldset>
-                        <div class="text-center" id="student-inputs-container">
-                            <div class="row g-3 py-2 align-items-center justify-content-center student-name-inputs" id="student-1">
-                                <div class="col-auto">
-                                    <input type="text" class="form-control" name="studentFName[]" placeholder="First Name" ariaLabel="first name">
-                                </div>
-                                <div class="col-auto">
-                                    <input type="text" class="form-control" name="studentLName[]" placeholder="Last Name" ariaLabel="last name">
-                                </div>
-                            </div>
-                            <button type="button" class="fa-sharp fa-solid fa-circle-plus btn btn-outline-primary" id="add-student-row-btn" aria-label="Add another student"></button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" form="addStudentsForm" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>
