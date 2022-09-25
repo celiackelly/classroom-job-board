@@ -9,39 +9,13 @@
             <h2 class="heading-with-btn-right py-2">Current Job Board</h2>
             <%  if (students.length && course.jobList.length) {%> 
                     <button type="button" id="assign-new-jobs-btn" class="btn btn-primary">Assign New Jobs</button>
-                <%}
-                else {%>
+                <%} else {%>
                     <button type="button" disabled id="assign-new-jobs-btn" class="btn btn-primary">Assign New Jobs</button>    
                 <%}
             %>
             <button type="button" id="randomize-btn" class="btn btn-primary hidden">Randomize</button>
             <button type="button" id="save-btn" class="btn btn-primary hidden" data-bs-toggle="modal" data-bs-target="#saveJobAssignmentsModal">Save</button>
             <button type="button" id="cancel-btn" class="btn btn-danger hidden">Cancel</button>
-
-            <!-- <div class="pb-5">
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Job</th>
-                        <th scope="col">Student</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Paper Passer</td>
-                        <td draggable="true">Alexis Conlin</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Line Leader</td>
-                        <td draggable="true">Joel Chen</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Line Leader</td>
-                        <td draggable="true">Joel Chen</td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div> -->
 
             <table class="table">
                 <thead>
