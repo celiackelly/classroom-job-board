@@ -8,7 +8,6 @@ module.exports = {
             const courses = await Course.find({userId: req.user.id}).sort('name').exec()
             courses.forEach(course => {
                 course.studentCount = course.students.length
-                console.log(course.studentCount)
             })
             res.render('dashboard', { title: 'Dashboard', user: req.user, courses})
         } catch(err) {

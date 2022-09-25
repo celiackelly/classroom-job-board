@@ -108,6 +108,7 @@ module.exports = {
     },
     assignJobs: async (req, res) => {
         try {
+            console.log(req.body)
             //find course by id that matches req.params.id
             //update currentJobAssignments for the course
             

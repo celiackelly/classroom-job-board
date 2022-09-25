@@ -1,6 +1,7 @@
 const assignNewJobsBtn = document.querySelector('#assign-new-jobs-btn')
 const randomizeBtn = document.querySelector('#randomize-btn')
 const saveBtn = document.querySelector('#save-btn')
+const modalSaveBtn = document.querySelector('#modal-save-btn')
 
 assignNewJobsBtn.addEventListener('click', () => {
     randomizeBtn.classList.remove('hidden')
@@ -76,10 +77,30 @@ randomizeBtn.addEventListener('click', () => {
     }
 })
 
-saveBtn.addEventListener('click', () => {
-   
-    //save to database 
-    //re-render the page...so no need to toggle button .hidden class
+modalSaveBtn.addEventListener('click', async () => {
+    
+    try {
+        const courseId = window.location.href.split('/')[5]
+        console.log(courseId)
+        const tableRows = Array.from(document.querySelectorAll('tbody tr'))
+        const assignments = tableRows.map(row => {
+            const jobId = row.querySelector('th').dataset.id
+            const studentId = row.querySelector('span').dataset.id
+            return { 'jobId': jobId, 'studentId': studentId }
+        })
+        console.log(assignments)
+        const response = await fetch(`/courses/${courseId}/currentJobAssignments`, {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                'assignments': assignments
+            })
+        })
+        window.location.reload()
+
+    } catch(err){
+        console.log(err)
+    }
 })
 
 
