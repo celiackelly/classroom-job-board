@@ -26,7 +26,7 @@
                 </thead>
                 <tbody>
                     <%  if (course.currentJobAssignments.length) { %> 
-                            <% course.currentJobAssignments.forEach (assignment => { %> 
+                            <% course.currentJobAssignments.sort((a, b) => a.job.title.localeCompare(b.job.title)).forEach (assignment => { %> 
                                     <tr>
                                         <th scope="row" data-id="<%= assignment.job._id%>"><%= assignment.job.title%></th>
                                         <% if (assignment.student) { %>
