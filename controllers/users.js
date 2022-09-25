@@ -19,7 +19,10 @@ module.exports = {
     getCourse: async (req, res) => {
         try {
             const course = await Course.findById(req.params.courseId)
-                                       .populate(['jobList', { path: 'currentJobAssignments', populate: [{path: 'job'}, {path: 'student'}]}])
+                                       .populate(
+                                            ['jobList', 
+                                            { path: 'currentJobAssignments', populate: [{path: 'job'}, {path: 'student'}]}
+                                            ])
                                        .lean()
             const students = await Student.find({ enrolledInCourse: req.params.courseId })
                                           .sort('lastName')

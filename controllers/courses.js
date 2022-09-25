@@ -54,30 +54,6 @@ module.exports = {
             res.redirect(303, `/users/dashboard`)
         }
     },
-    editJobList: async (req, res) => {
-        try {
-            const jobListInput = req.body.jobList
-            //How can I pass the job IDs through instead, while still displaying just the titles in the datalist input? 
-            const jobList = await Job.find({ title: { $in: jobListInput } }).sort('title')
-            const jobIds = jobList.map(job => job._id)
-
-            await Course.findByIdAndUpdate(req.params.id, {
-                jobList: jobIds
-            }, {
-                upsert: false, 
-                runValidators: true
-            })
-            console.log(`Course Updated: editJobList`)
-            //By default, Express uses HTTP 302 for redirect, but this prevents PUT/POST requests from being redirected, 
-            //so you have to set the code to 303
-            //https://expressjs.com/en/api.html#res.redirect - also note the leading vs. trailing slashes
-            res.redirect(303, `/users/courses/${req.params.id}`)
-        } catch(err) {
-            console.log(err)
-            req.flash('errors', { msg: 'Unable to update class job list.' })
-            res.redirect(303,  `/users/courses/${req.params.id}`)
-        }
-    },
     addStudents: async (req, res) => {
         try {
             const studentFNames = req.body.studentFName
@@ -104,6 +80,73 @@ module.exports = {
             console.log(err)
             req.flash('errors', { msg: 'Unable to add students to course.' })
             res.redirect(303, `/users/courses/${req.params.id}`)
+        }
+    },
+    editJobList: async (req, res) => {
+        try {
+            const newJobListInput = req.body.jobList
+            //How can I pass the job IDs through instead, while still displaying just the titles in the datalist input? 
+            const newJobList = await Job.find({ title: { $in: newJobListInput } }).sort('title')
+            const newJobIds = newJobList.map(job => job._id)
+
+            const course = await Course.findOne({_id: req.params.id}).populate({ path: 'currentJobAssignments', populate: [{path: 'job'}, {path: 'student'}]})
+            console.log('course', course)
+            const assignedJobs = course.currentJobAssignments.map(assignment => assignment.job)
+            const deletedJobs = assignedJobs.filter(({ _id: id1 }) => !newJobIds.some(({ _id: id2 }) => id1.equals(id2)))
+
+            if (deletedJobs) {
+                await Course.findOneAndUpdate(
+                    {
+                        _id: req.params.id
+                    }, 
+                    {
+                        $pull: {
+                            currentJobAssignments: { job: { $in: deletedJobs } }
+                        } 
+                    }, 
+                    {
+                    upsert: false, 
+                    runValidators: true
+                    }
+                )
+ 
+                await Student.updateMany(
+                    {
+                        enrolledInCourse: req.params.id
+                    }, 
+                    {
+                        $set: {
+                            "jobHistory.$[elemX].endedOn": new Date()
+                        } 
+                    }, 
+                    {
+                        arrayFilters: [
+                            {
+                                "elemX.title": { $in: deletedJobs },
+                                "elemX.endedOn": undefined
+                            }
+                        ],
+                        upsert: false, 
+                        runValidators: true
+                    }
+                )
+            }
+
+            await Course.findByIdAndUpdate(req.params.id, {
+                jobList: newJobIds
+            }, {
+                upsert: false, 
+                runValidators: true
+            })
+            console.log(`Course Updated: editJobList`)
+            //By default, Express uses HTTP 302 for redirect, but this prevents PUT/POST requests from being redirected, 
+            //so you have to set the code to 303
+            //https://expressjs.com/en/api.html#res.redirect - also note the leading vs. trailing slashes
+            res.redirect(303, `/users/courses/${req.params.id}`)
+        } catch(err) {
+            console.log(err)
+            req.flash('errors', { msg: 'Unable to update class job list.' })
+            res.redirect(303,  `/users/courses/${req.params.id}`)
         }
     },
     assignJobs: async (req, res) => {
