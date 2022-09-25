@@ -5,27 +5,10 @@
     </div>
     <div class="row justify-content-between">
         <!-- Current Job Assignments-->
-        <section class="col-md-7 col-lg-8 order-md-2 ms-3">
+        <section class="col-md-7 col-lg-8 order-md-2 ms-3 mt-3">
             <h2 class="heading-with-btn-right py-2">Current Job Board</h2>
             <button type="button" class="btn btn-primary">Assign New Jobs</button>
-                        <!-- <div class="container-fluid ms-3">
-                <div class="row">
-                    <ul class="list-group col-4">
-                        <li class="list-group-item">An item</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
-                        <li class="list-group-item">A fourth item</li>
-                        <li class="list-group-item">And a fifth one</li>
-                    </ul>
-                    <ul class="list-group col-4">
-                        <li class="list-group-item">An item</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
-                        <li class="list-group-item">A fourth item</li>
-                        <li class="list-group-item">And a fifth one</li>
-                    </ul>
-                </div>
-            </div> -->
+
             <!-- <div class="pb-5">
                 <table class="table">
                     <thead>
@@ -62,10 +45,8 @@
                     <%  if (course.currentJobAssignments.length) { %> 
                             <% course.currentJobAssignments.forEach (assignment => { %> 
                                     <tr>
-                                        <!--probably need to add a data-id here...-->
-                                        <th scope="row"><%= assignment.job.title%></th>
-                                        <!--does the student's name need to be in a span?-->
-                                        <td><%= assignment.student.firstName%> <%= assignment.student.lastName%></td>    
+                                        <th scope="row" data-id="<%= assignment.job._id%>"><%= assignment.job.title%></th>
+                                        <td><span data-id="<%= assignment.student._id%>"><%= assignment.student.firstName%> <%= assignment.student.lastName%></span></td>    
                                     </tr>
                                 <% })
                             %>
@@ -73,20 +54,17 @@
                     %> 
                     <% unassignedJobs.forEach (job => { %> 
                             <tr>
-                                <!--probably need to add a data-id here...-->
-                                <th scope="row"><%= job.title %></th>
-                                <!--empty table cell for student-->
+                                <th scope="row" data-id="<%= job._id%>"><%= job.title %></th>
                                 <td></td>
                             </tr>
                         <% })
                     %>
-                    <!--how to display jobs w/o students and students w/o jobs?-->
                 </tbody>
             </table>
             <div class="unassigned-students-container">
                 <h3>Unassigned Students</h3>
                 <% unassignedStudents.forEach(student => { %>
-                    <span class="rounded"><%= student.firstName %> <%= student.lastName %></span>
+                    <span data-id="<%= student._id%>" class="rounded"><%= student.firstName %> <%= student.lastName %></span>
                     <% }) %>
             </div> 
             <%  if (!course.jobList.length) { %>

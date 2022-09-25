@@ -1,4 +1,3 @@
-const User = require('../models/User')
 const Course = require('../models/Course')
 const Student = require('../models/Student')
 const Job = require('../models/Job')
