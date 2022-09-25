@@ -68,11 +68,7 @@
                 <% unassignedStudents.forEach(student => { %>
                     <span data-id="<%= student._id%>" class="rounded"><%= student.firstName %> <%= student.lastName %></span>
                     <% }) %>
-            </div> 
-            <%  if (!course.jobList.length) { %>
-                    <p>Add some jobs to your job list to get started...</p>
-                <%} 
-            %> 
+            </div>  
         </section>
 
         <div class="col-md-3 order-md-1">
@@ -93,7 +89,7 @@
                         %>
                     </ul>
                     <%} else { %> 
-                        <p> Add some students to get started.</p>
+                        <p> Add some students to get started...</p>
                     <%}
                 %> 
             </section>
@@ -114,7 +110,9 @@
                                 <% })
                             %>
                         </ul>
-                    <%} 
+                    <%} else { %> 
+                        <p> Add some jobs to get started...</p>
+                    <%}
                 %> 
             </section>
         </div>
