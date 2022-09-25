@@ -23,7 +23,7 @@ const courseSchema = new mongoose.Schema({
     }],
     currentJobAssignments: [{
         job: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', required: true },
-        student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true },
+        student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
         //how to make sure this is [] by default?
     }],
 }, { timestamps: true })

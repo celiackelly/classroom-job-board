@@ -82,11 +82,10 @@ randomizeBtn.addEventListener('click', () => {
 modalSaveBtn.addEventListener('click', async () => {
     try {
         const courseId = window.location.href.split('/')[5]
-        console.log(courseId)
         const tableRows = Array.from(document.querySelectorAll('tbody tr'))
         const assignments = tableRows.map(row => {
             const jobId = row.querySelector('th').dataset.id
-            const studentId = row.querySelector('span').dataset.id
+            const studentId = row.querySelector('span') ? row.querySelector('span').dataset.id : undefined
             return { 'job': jobId, 'student': studentId }
         })
         console.log(assignments)

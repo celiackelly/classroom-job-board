@@ -90,9 +90,29 @@ module.exports = {
             const newJobIds = newJobList.map(job => job._id)
 
             const course = await Course.findOne({_id: req.params.id}).populate({ path: 'currentJobAssignments', populate: [{path: 'job'}, {path: 'student'}]})
-            console.log('course', course)
+
             const assignedJobs = course.currentJobAssignments.map(assignment => assignment.job)
             const deletedJobs = assignedJobs.filter(({ _id: id1 }) => !newJobIds.some(({ _id: id2 }) => id1.equals(id2)))
+            const newlyAddedJobIds = newJobIds.filter(({ _id: id1 }) => !assignedJobs.some(({ _id: id2 }) => id1.equals(id2)))
+            const newlyAddedJobEntries = newlyAddedJobIds.map(jobId => ({job: jobId}))
+            console.log('newlyAddedJobEntries',newlyAddedJobEntries)
+            
+            await Course.findOneAndUpdate(
+                {
+                    _id: req.params.id
+                }, 
+                {
+                    $push: {
+                        currentJobAssignments: { 
+                            $each: newlyAddedJobEntries
+                        }
+                    }
+                }, 
+                {
+                upsert: false, 
+                runValidators: true
+                }
+            )
 
             if (deletedJobs) {
                 await Course.findOneAndUpdate(
@@ -102,7 +122,7 @@ module.exports = {
                     {
                         $pull: {
                             currentJobAssignments: { job: { $in: deletedJobs } }
-                        } 
+                        }, 
                     }, 
                     {
                     upsert: false, 

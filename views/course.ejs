@@ -29,19 +29,17 @@
                             <% course.currentJobAssignments.forEach (assignment => { %> 
                                     <tr>
                                         <th scope="row" data-id="<%= assignment.job._id%>"><%= assignment.job.title%></th>
-                                        <td><span data-id="<%= assignment.student._id%>"><%= assignment.student.firstName%> <%= assignment.student.lastName%></span></td>    
+                                        <% if (assignment.student) { %>
+                                            <td><span data-id="<%= assignment.student._id%>"><%= assignment.student.firstName%> <%= assignment.student.lastName%></span></td>    
+                                            <%} else { %>
+                                                <td></td>
+                                            <%}
+                                        %> 
                                     </tr>
                                 <% })
                             %>
                         <%} 
                     %> 
-                    <% unassignedJobs.forEach (job => { %> 
-                            <tr>
-                                <th scope="row" data-id="<%= job._id%>"><%= job.title %></th>
-                                <td></td>
-                            </tr>
-                        <% })
-                    %>
                 </tbody>
             </table>
             <div class="unassigned-students-container">
@@ -162,7 +160,7 @@
                         <h6 class="h5">Add some jobs to get started...</h6> 
                         <div id="allJobsDataListInputDiv-0" class="my-2">
                             <!--Add number label?-->
-                            <input required name="jobList" class="form-control job-list-input" list="datalistOptions" placeholder="Type to search jobs..." aria-label="Select a job from the list">
+                            <input name="jobList" class="form-control job-list-input" list="datalistOptions" placeholder="Type to search jobs..." aria-label="Select a job from the list">
                             <datalist id="datalistOptions">
                                 <% allJobs.forEach(job => { %>
                                     <option value="<%= job.title %>">
