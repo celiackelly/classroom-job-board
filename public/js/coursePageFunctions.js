@@ -3,6 +3,8 @@ const randomizeBtn = document.querySelector('#randomize-btn')
 const saveBtn = document.querySelector('#save-btn')
 const modalSaveBtn = document.querySelector('#modal-save-btn')
 const cancelBtn = document.querySelector('#cancel-btn')
+const draggables = document.querySelectorAll('.draggable')
+const targets = document.querySelectorAll('.target')
 
 //When 'Assign New Jobs' button is clicked, show the Randomize, Save, and Cancel buttons
 assignNewJobsBtn.addEventListener('click', () => {
@@ -10,7 +12,47 @@ assignNewJobsBtn.addEventListener('click', () => {
     saveBtn.classList.remove('hidden')
     cancelBtn.classList.remove('hidden')
     assignNewJobsBtn.classList.add('hidden')
+    enableDrag()
 })
+
+function enableDrag() {
+    draggables.forEach(draggable => {
+        draggable.setAttribute('draggable', true)
+        draggable.addEventListener('dragstart', () => {
+          draggable.classList.add('dragging')
+        })
+      
+        draggable.addEventListener('dragend', () => {
+          draggable.classList.remove('dragging')
+        })
+      })
+
+      targets.forEach(target => {
+        target.addEventListener('dragover', e => {
+          e.preventDefault()
+          const afterElement = getDragAfterElement(target, e.clientY)
+          const draggable = document.querySelector('.dragging')
+          if (afterElement == null) {
+            target.appendChild(draggable)
+          } else {
+            target.insertBefore(draggable, afterElement)
+          }
+        })
+      })
+}
+function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+  
+    return draggableElements.reduce((closest, child) => {
+      const box = child.getBoundingClientRect()
+      const offset = y - box.top - box.height / 2
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child }
+      } else {
+        return closest
+      }
+    }, { offset: Number.NEGATIVE_INFINITY }).element
+  }
 
 //Fisher-Yates Shuffle
 function shuffle(array) {   
@@ -56,6 +98,9 @@ randomizeBtn.addEventListener('click', () => {
         span.dataset.firstName = student.firstName
         span.dataset.lastName = student.lastName
         span.textContent = `${student.firstName} ${student.lastName}`
+        span.draggable = true
+        span.classList.add('draggable')
+        span.classList.add('rounded')
         return span
     })
 
@@ -78,7 +123,6 @@ randomizeBtn.addEventListener('click', () => {
     //If there are still studentSpans left after assigning to jobs in the table, put them in the unassigned students container
     if (studentSpans.length) {
         studentSpans.forEach(span => {
-            span.classList.add('rounded')
             unassignedStudentsContainer.appendChild(span)
         })
     }

@@ -156,6 +156,19 @@ footer i {
         color: #FFF;
     }
 
+    /* Draggable */
+
+    [draggable] {
+        background-color: #FFF;
+        padding: 5px;
+        margin: 5px;
+        cursor: move;
+    }
+      
+    [draggable].dragging {
+        opacity: .5;
+    }
+
     /* Unassigned Students */
 
     .unassigned-students-container span {

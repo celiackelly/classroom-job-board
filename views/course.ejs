@@ -30,11 +30,11 @@
                                     <tr>
                                         <th scope="row" data-id="<%= assignment.job._id%>"><%= assignment.job.title%></th>
                                         <% if (assignment.student) { %>
-                                            <td>
-                                                <span data-id="<%= assignment.student._id%>"><%= assignment.student.firstName%> <%= assignment.student.lastName%></span>
+                                            <td class="target">
+                                                <span class="draggable rounded" data-id="<%= assignment.student._id%>"><%= assignment.student.firstName%> <%= assignment.student.lastName%></span>
                                             </td>    
                                             <%} else { %>
-                                                <td></td>
+                                                <td class="target"></td>
                                             <%}
                                         %> 
                                     </tr>
@@ -44,10 +44,10 @@
                     %> 
                 </tbody>
             </table>
-            <div class="unassigned-students-container">
+            <div class="unassigned-students-container target">
                 <h3>Unassigned Students</h3>
                 <% unassignedStudents.forEach(student => { %>
-                    <span data-id="<%= student._id%>" class="rounded"><%= student.firstName %> <%= student.lastName %></span>
+                    <span class="draggable rounded" data-id="<%= student._id%>"><%= student.firstName %> <%= student.lastName %></span>
                     <% }) 
                 %>
             </div>  
@@ -203,3 +203,4 @@
 </section>
 
 <script type="module" src="/js/coursePageFunctions.js"></script>
+<script type="module" src="/js/draggableTable.js"></script>
