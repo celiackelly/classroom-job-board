@@ -149,6 +149,13 @@ footer i {
 
 /* Course Page */
 
+    /* Job Board Table */
+
+    thead {
+        background-color: #1371DE;
+        color: #FFF;
+    }
+
     /* Unassigned Students */
 
     .unassigned-students-container span {
