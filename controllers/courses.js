@@ -21,15 +21,15 @@ module.exports = {
                 return student
             })
             const students = await Student.create(studentList)
-            console.log(students)
             const studentIds = students.map(student => student._id)
 
-            await Course.updateOne({_id: course._id}, { $push: { students: {
-                $each: studentIds
-            } } })
-
+            await Course.updateOne(
+                {_id: course._id}, 
+                { $push: { students: { $each: studentIds } } }
+            )
             console.log('Course Added') 
             res.redirect(303, `/users/dashboard`)
+
         } catch(err) {
             console.log(err)
             req.flash('errors', { msg: 'Unable to create course.' })
@@ -67,12 +67,12 @@ module.exports = {
                 return student
             })
             const students = await Student.create(studentList)
-            console.log(students)
             const studentIds = students.map(student => student._id)
 
-            await Course.updateOne({_id: req.params.id}, { $push: { students: {
-                $each: studentIds
-            } } })
+            await Course.updateOne(
+                {_id: req.params.id}, 
+                { $push: { students: { $each: studentIds } } }
+            )
 
             console.log('Students Added to Course') 
             res.redirect(303, `/users/courses/${req.params.id}`)
@@ -89,79 +89,46 @@ module.exports = {
             const newJobList = await Job.find({ title: { $in: newJobListInput } }).sort('title')
             const newJobIds = newJobList.map(job => job._id)
 
-            const course = await Course.findOne({_id: req.params.id}).populate({ path: 'currentJobAssignments', populate: [{path: 'job'}, {path: 'student'}]})
+            const course = await Course.findOne({_id: req.params.id})
+                .populate(
+                    { path: 'currentJobAssignments', 
+                    populate: [{path: 'job'}, {path: 'student'}]}
+                )
 
             const assignedJobs = course.currentJobAssignments.map(assignment => assignment.job)
             const deletedJobs = assignedJobs.filter(({ _id: id1 }) => !newJobIds.some(({ _id: id2 }) => id1.equals(id2)))
             const newlyAddedJobIds = newJobIds.filter(({ _id: id1 }) => !assignedJobs.some(({ _id: id2 }) => id1.equals(id2)))
             const newlyAddedJobEntries = newlyAddedJobIds.map(jobId => ({job: jobId}))
-            console.log('newlyAddedJobEntries',newlyAddedJobEntries)
-            
-            await Course.findOneAndUpdate(
-                {
-                    _id: req.params.id
-                }, 
-                {
-                    $push: {
-                        currentJobAssignments: { 
-                            $each: newlyAddedJobEntries
-                        }
-                    }
-                }, 
-                {
-                upsert: false, 
-                runValidators: true
-                }
-            )
 
             if (deletedJobs) {
                 await Course.findOneAndUpdate(
-                    {
-                        _id: req.params.id
-                    }, 
-                    {
-                        $pull: {
-                            currentJobAssignments: { job: { $in: deletedJobs } }
-                        }, 
-                    }, 
-                    {
-                    upsert: false, 
-                    runValidators: true
-                    }
+                    { _id: req.params.id }, 
+                    { $pull: { currentJobAssignments: { job: { $in: deletedJobs } } } }, 
+                    { upsert: false, runValidators: true }
                 )
  
                 await Student.updateMany(
-                    {
-                        enrolledInCourse: req.params.id
-                    }, 
-                    {
-                        $set: {
-                            "jobHistory.$[elemX].endedOn": new Date()
-                        } 
-                    }, 
-                    {
-                        arrayFilters: [
-                            {
-                                "elemX.title": { $in: deletedJobs },
-                                "elemX.endedOn": undefined
-                            }
-                        ],
-                        upsert: false, 
-                        runValidators: true
+                    { enrolledInCourse: req.params.id }, 
+                    { $set: { "jobHistory.$[elemX].endedOn": new Date() } }, 
+                    { arrayFilters: [{ 
+                        "elemX.title": { $in: deletedJobs },
+                        "elemX.endedOn": undefined
+                        }],
+                        upsert: false, runValidators: true 
                     }
                 )
             }
 
-            await Course.findByIdAndUpdate(req.params.id, {
-                jobList: newJobIds
-            }, {
-                upsert: false, 
-                runValidators: true
-            })
+            await Course.findOneAndUpdate(
+                {_id: req.params.id}, 
+                { 
+                    $push: { currentJobAssignments: { $each: newlyAddedJobEntries } }, 
+                    jobList: newJobIds 
+                }, 
+                { upsert: false, runValidators: true }
+            )
+
             console.log(`Course Updated: editJobList`)
-            //By default, Express uses HTTP 302 for redirect, but this prevents PUT/POST requests from being redirected, 
-            //so you have to set the code to 303
-            //https://expressjs.com/en/api.html#res.redirect - also note the leading vs. trailing slashes
             res.redirect(303, `/users/courses/${req.params.id}`)
         } catch(err) {
             console.log(err)
@@ -171,31 +138,19 @@ module.exports = {
     },
     assignJobs: async (req, res) => {
         try {
-
             const newJobAssignments = req.body.assignments
-            await Course.findByIdAndUpdate(req.params.id, {
-                currentJobAssignments: newJobAssignments
-            }, {
-                upsert: false, 
-                runValidators: true
-            })
+            await Course.findOneAndUpdate(
+                {_id: req.params.id}, 
+                { currentJobAssignments: newJobAssignments }, 
+                { upsert: false, runValidators: true }
+            )
 
             // should I change this behavior if "new" job is the same?
             await Student.updateMany(
+                { enrolledInCourse: req.params.id }, 
+                { $set: { "jobHistory.$[elemX].endedOn": new Date() } }, 
                 {
-                    enrolledInCourse: req.params.id
-                }, 
-                {
-                    $set: {
-                        "jobHistory.$[elemX].endedOn": new Date()
-                    } 
-                }, 
-                {
-                    arrayFilters: [
-                        {
-                            "elemX.endedOn": undefined
-                        }
-                    ],
+                    arrayFilters: [{ "elemX.endedOn": undefined }],
                     upsert: false, 
                     runValidators: true
                 }
@@ -204,27 +159,20 @@ module.exports = {
             await Promise.all(
                 newJobAssignments.map(assignment => {
                     Student.findOneAndUpdate(
-                        {
-                            _id: assignment.student
-                        },
-                        {
-                            $push: {
-                                jobHistory: {
-                                    title: assignment.job, 
-                                    startedOn: new Date(),    
-                                }
+                        { _id: assignment.student },
+                        { $push: {
+                            jobHistory: {
+                                title: assignment.job, 
+                                startedOn: new Date(),    
                             }
-                        }, 
-                        {
-                            upsert: false, 
-                            runValidators: true
-                        }
+                        }}, 
+                        { upsert: false, runValidators: true }
                     ).exec()
                 })
             )
-
             console.log(`Course Updated: assignJobs`)
             res.redirect(303, `/users/courses/${req.params.id}`)
+            
         } catch(err) {
             console.log(err)
             req.flash('errors', { msg: 'Unable to assign jobs.' })
