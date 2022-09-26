@@ -4,6 +4,7 @@ const saveBtn = document.querySelector('#save-btn')
 const modalSaveBtn = document.querySelector('#modal-save-btn')
 const cancelBtn = document.querySelector('#cancel-btn')
 
+//When 'Assign New Jobs' button is clicked, show the Randomize, Save, and Cancel buttons
 assignNewJobsBtn.addEventListener('click', () => {
     randomizeBtn.classList.remove('hidden')
     saveBtn.classList.remove('hidden')
@@ -28,8 +29,9 @@ function shuffle(array) {
     return array;
 }
 
+//When the Randomize button is clicked, randomize the students array and re-populate the Job Board (DOM)
 randomizeBtn.addEventListener('click', () => {
-    // make sure you're dealing with extra jobs and extra students...
+    //Get the list of students from the roster list
     const studentsInRoster = Array.from(document.querySelectorAll('[data-listname="roster"]')).map(el => {
         return {
             id: el.dataset.id, 
@@ -37,17 +39,17 @@ randomizeBtn.addEventListener('click', () => {
             lastName: el.dataset.lastName
         }
     })
-    console.log('original', studentsInRoster)
+    //Get the list of jobs from the Job List
     const jobList = Array.from(document.querySelectorAll('[data-listname="joblist"]')).map(el => {
         return {
             id: el.dataset.id, 
             title: el.dataset.title
         }
     })
+    //Shuffle the students array using the Fisher-Yates Shuffle
     const shuffledStudents = shuffle(studentsInRoster.slice())
-    console.log('shuffled', shuffledStudents)
 
-    //use while loop to append students while there are still open jobs, and then add the rest to the unassigned students container? 
+    //Create a span for each student in the shuffledStudents array; add textContent and data-attributes
     let studentSpans = shuffledStudents.map(student => {
         let span = document.createElement('span')
         span.dataset.id = student.id
@@ -57,6 +59,7 @@ randomizeBtn.addEventListener('click', () => {
         return span
     })
 
+    //Iterate through the td cells; remove any children (spans) and append one of the shuffled studentSpans
     const tdCells = document.querySelectorAll('td')
     tdCells.forEach((cell, i) => {
         while (cell.firstChild) {
@@ -67,10 +70,12 @@ randomizeBtn.addEventListener('click', () => {
         }
     })
 
+    //Remove all the unassigned student spans from the container
     const unassignedStudentsContainer = document.querySelector('.unassigned-students-container')
     const unassignedStudentSpans = Array.from(unassignedStudentsContainer.querySelectorAll('span'))
     unassignedStudentSpans.forEach(span => unassignedStudentsContainer.removeChild(span))
 
+    //If there are still studentSpans left after assigning to jobs in the table, put them in the unassigned students container
     if (studentSpans.length) {
         studentSpans.forEach(span => {
             span.classList.add('rounded')
@@ -79,16 +84,18 @@ randomizeBtn.addEventListener('click', () => {
     }
 })
 
+//When the modal Save button is clicked to confirm job assignments, grab them from the table and send to the server
 modalSaveBtn.addEventListener('click', async () => {
     try {
         const courseId = window.location.href.split('/')[5]
         const tableRows = Array.from(document.querySelectorAll('tbody tr'))
         const assignments = tableRows.map(row => {
+            //Get the jobId from each job cell
             const jobId = row.querySelector('th').dataset.id
+            //Get the studentId from each studentSpan in the tds (or set to undefined, if the td has no student span (meaning the job is unassigned)
             const studentId = row.querySelector('span') ? row.querySelector('span').dataset.id : undefined
             return { 'job': jobId, 'student': studentId }
         })
-        console.log(assignments)
         await fetch(`/courses/${courseId}/currentJobAssignments`, {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
@@ -103,6 +110,7 @@ modalSaveBtn.addEventListener('click', async () => {
     }
 })
 
+//When the Cancel button is pressed, reload the window to wipe out the DOM changes
 cancelBtn.addEventListener('click', () => {
     window.location.reload()
 })

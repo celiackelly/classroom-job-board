@@ -30,7 +30,9 @@
                                     <tr>
                                         <th scope="row" data-id="<%= assignment.job._id%>"><%= assignment.job.title%></th>
                                         <% if (assignment.student) { %>
-                                            <td><span data-id="<%= assignment.student._id%>"><%= assignment.student.firstName%> <%= assignment.student.lastName%></span></td>    
+                                            <td>
+                                                <span data-id="<%= assignment.student._id%>"><%= assignment.student.firstName%> <%= assignment.student.lastName%></span>
+                                            </td>    
                                             <%} else { %>
                                                 <td></td>
                                             <%}
@@ -46,7 +48,8 @@
                 <h3>Unassigned Students</h3>
                 <% unassignedStudents.forEach(student => { %>
                     <span data-id="<%= student._id%>" class="rounded"><%= student.firstName %> <%= student.lastName %></span>
-                    <% }) %>
+                    <% }) 
+                %>
             </div>  
         </section>
 
