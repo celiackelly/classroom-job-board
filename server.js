@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({path: './config/.env'})
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   require('dotenv').config({path: './config/.env'})
+// }
 
 const express = require('express')
 const app = express()
@@ -12,7 +12,7 @@ const MongoStore = require('connect-mongo')(session)
 const methodOverride = require("method-override")
 const expressLayouts = require('express-ejs-layouts')
 const flash = require('express-flash')
-const logger = require('morgan')
+// const logger = require('morgan')
 const connectDB = require("./config/database");
 
 // Passport config
@@ -36,7 +36,7 @@ app.use(expressLayouts)
 //Use forms for put / delete
 app.use(methodOverride("_method"));
 
-app.use(logger('dev'))
+// app.use(logger('dev'))
 
 // Sessions
 app.use(
