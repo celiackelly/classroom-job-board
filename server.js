@@ -1,9 +1,6 @@
-// if (process.env.NODE_ENV !== 'production') {
-//   require('dotenv').config({path: './config/.env'})
-// }
-
 const express = require('express')
 const app = express()
+require('dotenv').config({path: './config/.env'})
 const PORT = process.env.PORT
 const mongoose = require('mongoose')
 const passport = require('passport')
@@ -12,7 +9,7 @@ const MongoStore = require('connect-mongo')(session)
 const methodOverride = require("method-override")
 const expressLayouts = require('express-ejs-layouts')
 const flash = require('express-flash')
-// const logger = require('morgan')
+const logger = require('morgan')
 const connectDB = require("./config/database");
 
 // Passport config
@@ -48,7 +45,7 @@ app.use(
     })
   )
 
-//Enable https redirect
+//Enable https redirect 
 app.enable('trust proxy')
 app.use((req, res, next) => {
     req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
