@@ -1,6 +1,11 @@
 // const importCoursesBtn = document.querySelector('#import-courses-btn')
 // importCoursesBtn.addEventListener('click', importCourses)
 
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
 const addStudentRowBtn = document.querySelector('#add-student-row-btn')
 addStudentRowBtn.addEventListener('click', addStudentRow)
 //In the 'Add Class' modal, add another row of student name inputs when the plus icon is clicked

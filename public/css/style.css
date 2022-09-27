@@ -151,6 +151,25 @@ footer i {
 
     /* Job Board Table */
 
+    #job-board {
+        table-layout: auto;
+    }
+
+    @media screen and (min-width: 992px) {
+        table#job-board {
+            width: 75%;
+        }
+    }
+
+    .unassigned-students-container span, 
+    #job-board span {
+        display: inline-block;
+    }
+
+    th {
+        width: 50%;
+    }
+
     thead {
         background-color: #1371DE;
         color: #FFF;

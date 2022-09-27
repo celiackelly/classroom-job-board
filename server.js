@@ -45,7 +45,7 @@ app.use(
     })
   )
 
-//Enable https redirect
+//Enable https redirect when in production mode
 if (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production') {
     app.enable('trust proxy')
     app.use((req, res, next) => {
