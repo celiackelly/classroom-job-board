@@ -45,11 +45,13 @@ app.use(
     })
   )
 
-//Enable https redirect 
-app.enable('trust proxy')
-app.use((req, res, next) => {
-    req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
-})
+//Enable https redirect
+if (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production') {
+    app.enable('trust proxy')
+    app.use((req, res, next) => {
+      req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
+  })
+}
   
 // Passport middleware
 app.use(passport.initialize())
