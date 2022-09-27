@@ -47,6 +47,12 @@ app.use(
       store: new MongoStore({ mongooseConnection: mongoose.connection }),
     })
   )
+
+//Enable https redirect
+app.enable('trust proxy')
+app.use((req, res, next) => {
+    req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
+})
   
 // Passport middleware
 app.use(passport.initialize())
