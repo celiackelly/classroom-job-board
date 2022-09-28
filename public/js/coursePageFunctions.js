@@ -1,3 +1,9 @@
+//Initialize all tooltips on the page
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
 const assignNewJobsBtn = document.querySelector('#assign-new-jobs-btn')
 const randomizeBtn = document.querySelector('#randomize-btn')
 const saveBtn = document.querySelector('#save-btn')

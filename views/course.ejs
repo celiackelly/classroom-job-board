@@ -17,7 +17,7 @@
             <%  if (students.length && course.jobList.length) {%> 
                     <button type="button" id="assign-new-jobs-btn" class="btn btn-cta">Assign New Jobs</button>
                 <%} else {%>
-                    <button type="button" disabled id="assign-new-jobs-btn" class="btn btn-primary">Assign New Jobs</button>    
+                    <span data-bs-toggle="tooltip" data-bs-placement="right" title="First, add to your job list"><button type="button" disabled id="assign-new-jobs-btn" class="btn btn-primary" >Assign New Jobs</button></span>    
                 <%}
             %>
             <button type="button" id="randomize-btn" class="btn btn-primary hidden">Randomize</button>
