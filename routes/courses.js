@@ -29,4 +29,8 @@ router.put('/:id/jobList', ensureAuth, coursesController.editJobList)
 // @route   PUT /courses/:id/currentJobAssignments
 router.put('/:id/currentJobAssignments', ensureAuth, coursesController.assignJobs)
 
+// @desc    Delete a course
+// @route   DELETE /courses/:id
+router.delete('/:id', ensureAuth, coursesController.deleteCourse)
+
 module.exports = router

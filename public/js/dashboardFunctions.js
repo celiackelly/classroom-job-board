@@ -23,18 +23,32 @@ function addStudentRow() {
 }
 
 //Rename Class 
-const renameClassBtns = Array.from(document.querySelectorAll('.rename-class-btn'))
-const renameClassForm = document.querySelector('#rename-class-form')
+const renameCourseBtns = Array.from(document.querySelectorAll('.rename-course-btn'))
+const renameCourseForm = document.querySelector('#rename-course-form')
 const renameInput = document.querySelector('#rename-input')
 /*When a rename class button in the overflow menu for any class is clicked, 
-  set the form action of the modal form to include that class's id
+  set the form action of the modal rename form to include that class's id in the route
   and set the rename input's placeholder text to the current class name
 */
-renameClassBtns.forEach(btn => {
+renameCourseBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       const courseId = e.target.closest('ul').dataset.courseId
-      renameClassForm.setAttribute('action', `/courses/${courseId}/rename?_method=PUT`)
+      renameCourseForm.setAttribute('action', `/courses/${courseId}/rename?_method=PUT`)
       const courseName = e.target.closest('ul').dataset.courseName
       renameInput.setAttribute('placeholder', courseName)
   })
+})
+
+
+//Delete Class
+const deleteCourseBtns = Array.from(document.querySelectorAll('.delete-course-btn'))
+const deleteCourseForm = document.querySelector('#delete-course-form')
+/*When a delete class button in the overflow menu for any class is clicked, 
+  set the form action of the modal delete form to include that class's id in the route
+*/
+deleteCourseBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const courseId = e.target.closest('ul').dataset.courseId
+        deleteCourseForm.setAttribute('action', `/courses/${courseId}?_method=DELETE`)
+    })
 })

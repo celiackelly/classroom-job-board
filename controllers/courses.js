@@ -196,5 +196,17 @@ module.exports = {
             res.redirect(303,  `/users/courses/${req.params.id}`)
         }
     },
+    deleteCourse: async (req, res) => {
+        try {
+            await Course.findByIdAndDelete(req.params.id)
+
+            console.log('Course Deleted') 
+            res.redirect(303, `/users/dashboard`)
+        } catch(err) {
+            console.log(err)
+            req.flash('errors', { msg: 'Unable to delete course.' })
+            res.redirect(303, `/users/dashboard`)
+        }
+    },
 }
 
