@@ -4,10 +4,18 @@ const Job = require('../models/Job')
 
 module.exports = {
     getDashboard: async (req, res) => {
+
+        const dateOptions = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        }
+
         try {
             const courses = await Course.find({userId: req.user.id}).sort('name').exec()
             courses.forEach(course => {
                 course.studentCount = course.students.length
+                course.createdAtString = course.createdAt.toLocaleString('en-US', dateOptions)
             })
             res.render('dashboard', { title: 'Dashboard', user: req.user, courses})
         } catch(err) {

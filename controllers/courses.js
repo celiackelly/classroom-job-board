@@ -82,6 +82,23 @@ module.exports = {
             res.redirect(303, `/users/courses/${req.params.id}`)
         }
     },
+    renameCourse: async (req, res) => {
+        try {
+            const newCourseName = req.body.courseName
+
+            await Course.updateOne(
+                {_id: req.params.id}, 
+                { name: newCourseName }
+            )
+
+            console.log('Course Renamed') 
+            res.redirect(303, `/users/dashboard`)
+        } catch(err) {
+            console.log(err)
+            req.flash('errors', { msg: 'Unable to rename course.' })
+            res.redirect(303, `/users/dashboard`)
+        }
+    },
     editJobList: async (req, res) => {
         try {
             const newJobListInput = req.body.jobList

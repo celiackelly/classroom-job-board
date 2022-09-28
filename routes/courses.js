@@ -17,6 +17,10 @@ router.post('/google', ensureAuth, coursesController.importCourses)
 // @route   POST /courses/:id/students
 router.post('/:id/students', ensureAuth, coursesController.addStudents)
 
+// @desc    Rename a course
+// @route   PUT /courses/:id/rename
+router.put('/:id/rename', ensureAuth, coursesController.renameCourse)
+
 // @desc    Edit the job list for a given course
 // @route   PUT /courses/:id/jobList
 router.put('/:id/jobList', ensureAuth, coursesController.editJobList)
