@@ -106,6 +106,7 @@ h1 + p {
 
 .navbar-brand img {
     width: 2rem;
+    height: auto;
 }
 
 .nav-link:not(.btn-cta) {
