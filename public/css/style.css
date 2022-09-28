@@ -150,6 +150,7 @@ footer i {
     /* Cards */
     .card-img-top {
         width: 40%;
+        height: auto;
         margin: auto;
         object-fit: cover;
     }
