@@ -2,6 +2,13 @@
 <div class="container-fluid p-5">
     <div class="row">
         <h1>Class: <%= course.name %></h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item small"><a href="/">Home</a></li>
+              <li class="breadcrumb-item small"><a href="/users/dashboard">Dashboard</a></li>
+              <li class="breadcrumb-item small active" aria-current="page"><%=course.name%></li>
+            </ol>
+          </nav>
     </div>
     <div class="row justify-content-between">
         <!-- Current Job Assignments-->
@@ -10,7 +17,7 @@
             <%  if (students.length && course.jobList.length) {%> 
                     <button type="button" id="assign-new-jobs-btn" class="btn btn-cta">Assign New Jobs</button>
                 <%} else {%>
-                    <button type="button" disabled id="assign-new-jobs-btn" class="btn btn-cta">Assign New Jobs</button>    
+                    <button type="button" disabled id="assign-new-jobs-btn" class="btn btn-primary">Assign New Jobs</button>    
                 <%}
             %>
             <button type="button" id="randomize-btn" class="btn btn-primary hidden">Randomize</button>

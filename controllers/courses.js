@@ -198,9 +198,11 @@ module.exports = {
     },
     deleteCourse: async (req, res) => {
         try {
+            await Student.deleteMany({ enrolledInCourse: req.params.id })
+
             await Course.findByIdAndDelete(req.params.id)
 
-            console.log('Course Deleted') 
+            console.log('Course and Students Deleted') 
             res.redirect(303, `/users/dashboard`)
         } catch(err) {
             console.log(err)
