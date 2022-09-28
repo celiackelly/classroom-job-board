@@ -137,6 +137,11 @@ footer i {
         background-color: #FFF;
     }
 
+.section-hero img {
+    width: 100%; 
+    height: auto;
+}
+
     #section-hero-text-container {
         padding: 0 3rem 0 2rem;
     }
