@@ -105,7 +105,8 @@ randomizeBtn.addEventListener('click', () => {
         span.dataset.lastName = student.lastName
         span.textContent = `${student.firstName} ${student.lastName}`
         span.draggable = true
-        span.classList.add(['draggable', 'rounded'])
+        span.classList.add('draggable')
+        span.classList.add('rounded')
         return span
     })
 
