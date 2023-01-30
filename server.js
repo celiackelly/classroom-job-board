@@ -15,9 +15,6 @@ const connectDB = require("./config/database");
 // Passport config
 require('./config/passport')(passport)
 
-//Connect To Database
-connectDB();
-
 const mainRouter = require('./routes/main')
 const usersRouter = require('./routes/users')
 const coursesRouter = require('./routes/courses')
@@ -81,7 +78,12 @@ app.use( function( req, res, next ) {
 app.use('/', mainRouter)
 app.use('/users', usersRouter)
 app.use('/courses', coursesRouter)
- 
-app.listen(process.env.PORT || PORT, ()=>{
-  console.log(`Server running on port ${PORT}`)
-})  
+
+//Connect to the database before listening- very important for Cyclic serverless environment
+//https://docs.cyclic.sh/how-to/using-mongo-db#connections-in-a-serverless-runtime
+connectDB().then(() => {
+  app.listen(process.env.PORT || PORT, ()=>{
+      //If successful, log message to console
+      console.log(`Server running on port ${PORT}`)
+  })
+})
