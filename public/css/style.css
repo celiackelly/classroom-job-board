@@ -1,215 +1,223 @@
-
 /* General */
 
 body {
-    background-color: #DDEDFF;
+  background-color: #ddedff;
 }
 
 .blue-bg {
-    background-color: #1371DE;
-    color: #FFF;
+  background-color: #1371de;
+  color: #fff;
 }
 
 /* Typography */
 
 h1 {
-    color: #1371DE;
+  color: #1371de;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Saira Condensed', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Saira Condensed", sans-serif;
 }
 
 h1 + p {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .heading-with-btn-right {
-    display: inline-block;
-    vertical-align: middle;
-    padding-right: .5rem;
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 0.5rem;
 }
 
 .count-badge {
-    font-family: 'Saira Condensed', sans-serif;
-    background-color: #F4D836;
-    color: #000;
-    max-width: fit-content;
+  font-family: "Saira Condensed", sans-serif;
+  background-color: #f4d836;
+  color: #000;
+  max-width: fit-content;
+}
+
+.font-weight-bold {
+  font-weight: 700;
 }
 
 /* Buttons */
 
 .btn-cta {
-    background-color: #F4D836;
-    color: #000;
-    font-weight: 600;
+  background-color: #f4d836;
+  color: #000;
+  font-weight: 600;
 }
 
 .btn-overflow-menu {
-    color: #1371DE;
-    font-size: 1.25rem;
+  color: #1371de;
+  font-size: 1.25rem;
 }
 
 .btn-primary {
-    background-color: #1371DE; 
+  background-color: #1371de;
 }
 
 .btn-google {
-    color: #545454;
-    background-color: #FFF;
-    box-shadow: 0 1px 2px 1px #DDD;
-    font-family: 'Roboto', sans-serif;
+  color: #545454;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 1px #ddd;
+  font-family: "Roboto", sans-serif;
 }
 .btn-google:hover {
-    background-color: #FFF;
-    box-shadow: 0 1px 2px 1px #DDD;
-    border: none;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 1px #ddd;
+  border: none;
 }
 
 .or-divider {
-    width: 100%; 
-    text-align: center; 
-    border-bottom: 1px solid #000; 
-    line-height: 0.1em;
-    margin: 10px 0 20px; 
- } 
- 
-.or-divider span { 
-    background: #DDEDFF; 
-    padding: 0 10px; 
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.or-divider span {
+  background: #ddedff;
+  padding: 0 10px;
 }
 
 .btn.fa-circle-plus {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
-
 
 /* List Styling */
 
 .list-style-none {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 /* Header / Navbar */
 
 .navbar {
-    background-color: #1371DE;
+  background-color: #1371de;
 }
 
 .navbar-brand span {
-    text-transform: uppercase;
-    font-weight: 600;
-    font-family: 'Saira Condensed', sans-serif;
-    vertical-align: middle;
-    color: #FFF;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: "Saira Condensed", sans-serif;
+  vertical-align: middle;
+  color: #fff;
 }
 
 .navbar-brand img {
-    width: 2rem;
-    height: auto;
+  width: 2rem;
+  height: auto;
 }
 
 .nav-link:not(.btn-cta) {
-    color: #FFF;
+  color: #fff;
 }
 
 .navbar-collapse {
-    text-align: center;
+  text-align: center;
 }
 
 /* Footer */
-footer a, footer span {
-    color: #DDEDFF;
+footer a,
+footer span {
+  color: #ddedff;
 }
 
 footer a:hover {
-    color: #1371DE;
+  color: #1371de;
 }
 
 footer i {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 /* Homepage */
 
-    /* Hero Section */
-    .section-hero {
-        padding: 0;
-        background-color: #FFF;
-    }
-
-.section-hero img {
-    width: 100%; 
-    height: auto;
+/* Hero Section */
+.section-hero {
+  padding: 0;
+  background-color: #fff;
 }
 
-    #section-hero-text-container {
-        padding: 0 3rem 0 2rem;
-    }
+.section-hero img {
+  width: 100%;
+  height: auto;
+}
 
-    /* Cards */
-    .card-img-top {
-        width: 40%;
-        height: auto;
-        margin: auto;
-        object-fit: cover;
-    }
+#section-hero-text-container {
+  padding: 0 3rem 0 2rem;
+}
 
-    .card {
-        height: 100%;
-    }
+/* Cards */
+.card-img-top {
+  width: 40%;
+  height: auto;
+  margin: auto;
+  object-fit: cover;
+}
+
+.card {
+  height: 100%;
+}
 
 /* Course Page */
 
-    /* Job Board Table */
+/* Job Board Table */
 
-    #job-board {
-        table-layout: auto;
-    }
+#job-board {
+  table-layout: auto;
+}
 
-    @media screen and (min-width: 992px) {
-        table#job-board {
-            width: 75%;
-        }
-    }
+@media screen and (min-width: 992px) {
+  table#job-board {
+    width: 75%;
+  }
+}
 
-    .unassigned-students-container span, 
-    #job-board span {
-        display: inline-block;
-    }
+.unassigned-students-container span,
+#job-board span {
+  display: inline-block;
+}
 
-    th {
-        width: 50%;
-    }
+th {
+  width: 50%;
+}
 
-    thead {
-        background-color: #1371DE;
-        color: #FFF;
-    }
+thead {
+  background-color: #1371de;
+  color: #fff;
+}
 
-    /* Draggable */
+/* Draggable */
 
-    [draggable] {
-        background-color: #FFF;
-        padding: 5px;
-        margin: 5px;
-        cursor: move;
-    }
-      
-    [draggable].dragging {
-        opacity: .5;
-    }
+[draggable] {
+  background-color: #fff;
+  padding: 5px;
+  margin: 5px;
+  cursor: move;
+}
 
-    /* Unassigned Students */
+[draggable].dragging {
+  opacity: 0.5;
+}
 
-    .unassigned-students-container span {
-        background-color: #FFF;
-        padding: 5px;
-        margin: 5px;
-    }
+/* Unassigned Students */
 
-    /* Showing/Hiding Buttons*/
+.unassigned-students-container span {
+  background-color: #fff;
+  padding: 5px;
+  margin: 5px;
+}
 
-    .hidden {
-        display: none;
-    }
+/* Showing/Hiding Buttons*/
+
+.hidden {
+  display: none;
+}
